@@ -17,7 +17,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
-import main.TestEmailGenerator;
 
 public class MyFirstAppium {
 

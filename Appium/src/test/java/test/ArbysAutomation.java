@@ -30,11 +30,11 @@ public class ArbysAutomation {
         extent.attachReporter(spark);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Pixel 7 API VanillaIceCream");
+        capabilities.setCapability("deviceName", "Pixel 7");
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("automationName", "uiautomator2");
 //        capabilities.setCapability("app", "/Users/pankajsonava/Downloads/Arby'sBuzzparadeSigned.apk");
-        capabilities.setCapability("app","/Users/pankajsonava/Downloads/Arby'sBuzzparadeSigned_nounattendedcartblock.apk");
+        capabilities.setCapability("app","/Users/apple/Downloads/Arby'sBuzzparadeSigned_nounattendedcartblock.apk");
         capabilities.setCapability("platformVersion", "14");
         capabilities.setCapability("autoGrantPermissions", true);
 
@@ -124,14 +124,14 @@ public class ArbysAutomation {
             try {
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"5\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"1\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '5' selected from picker");
+                test.pass("Time '1' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '5' not found in time picker");
+                test.fail("Value '1' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -149,6 +149,7 @@ public class ArbysAutomation {
             proceed2.click();
             test.pass("Clicked Proceed again");
 
+            Thread.sleep(7000);
             driver.findElement(
                     MobileBy.AndroidUIAutomator(
                             "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"PaymentType\"))"
@@ -156,14 +157,14 @@ public class ArbysAutomation {
             );
             test.pass("Scrolled to Payment Type");
 
-//            Thread.sleep(5000);
-//            WebElement paymentOption = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\")"));
-//            paymentOption.click();
-//            test.pass("Selected payment method");
-//
-//            Thread.sleep(5000);
-//            WebElement finalCheckout = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
-//            finalCheckout.click();
+            Thread.sleep(5000);
+            WebElement paymentOption = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\")"));
+            paymentOption.click();
+            test.pass("Selected payment method");
+
+            Thread.sleep(5000);
+            WebElement finalCheckout = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
+            finalCheckout.click();
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

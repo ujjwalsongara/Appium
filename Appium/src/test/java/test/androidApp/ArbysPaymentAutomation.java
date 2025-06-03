@@ -1,4 +1,4 @@
-package test;
+package test.androidApp;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -20,7 +20,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.*;
-        import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
 
 public class ArbysPaymentAutomation {

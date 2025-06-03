@@ -1,4 +1,4 @@
-package test;
+package test.androidApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -6,12 +6,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
-import lombok.var;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Pause;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -20,8 +15,6 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.time.Duration;
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class addingItemInCart {

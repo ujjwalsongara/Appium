@@ -12,7 +12,19 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+    <repositories>
+        <repository>
+            <id>google</id>
+            <url>https://maven.google.com</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
 	<dependencies>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -26,22 +38,40 @@
             <version>1.18.32</version> <!-- or latest -->
             <scope>provided</scope>
         </dependency>
-		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
 			<version>8.6.0</version>
 		</dependency>
 
-		<!--
-		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<!--        <dependency>-->
+<!--            <groupId>io.appium</groupId>-->
+<!--            <artifactId>java-client</artifactId>-->
+<!--            <version>7.6.0</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.1.1.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+    <dependency>
+        <groupId>androidx.webkit</groupId>
+        <artifactId>webkit</artifactId>
+        <version>1.13.0</version>
+    </dependency>
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>4.16.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -51,8 +81,8 @@
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>  <!-- or logback-classic -->
-			<version>2.0.12</version> <!-- Use latest compatible version -->
+			<artifactId>slf4j-simple</artifactId>
+			<version>2.0.12</version>
 		</dependency>
 
         <dependency>
@@ -62,5 +92,4 @@
         </dependency>
 
 	</dependencies>
-
 </project>

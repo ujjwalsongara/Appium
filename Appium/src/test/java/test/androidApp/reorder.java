@@ -1,4 +1,4 @@
-package test;
+package test.androidApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -6,8 +6,8 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.var;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -25,7 +25,8 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class reorderTest {
+
+public class reorder {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -34,17 +35,24 @@ public class reorderTest {
     @Test
     public void reOrder() throws MalformedURLException, InterruptedException {
 
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyReOrder.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyReOrder1.html");
         extent =new ExtentReports();
         extent.attachReporter(spark);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Pixel 7");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("automationName", "uiautomator2");
-        capabilities.setCapability("app", "/Users/apple/Downloads/Arby'sBuzzparadeSigned_nounattendedcartblock.apk");
-        capabilities.setCapability("platformVersion", "14");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
         capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+
+
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
         driver = new AndroidDriver(url, capabilities);
@@ -55,12 +63,12 @@ public class reorderTest {
             Thread.sleep(2000);
             test.info("Application started");
 
-            Thread.sleep(3000);
+            Thread.sleep(6000);
             WebElement skipButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btnSkip"));
             skipButton.click();
             test.pass("Clicked on Skip");
 
-            Thread.sleep(5000);
+            Thread.sleep(9000);
             WebElement allowButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
             allowButton.click();
             test.pass("Clicked on Allow button");
@@ -97,11 +105,11 @@ public class reorderTest {
 
             test = extent.createTest("Order History").assignCategory("Regression");
 
-            Thread.sleep(10000);
+            Thread.sleep(20000);
             WebElement el14 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_track"));
             el14.click();
 
-            Thread.sleep(5000);
+            Thread.sleep(7000);
             WebElement el15 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvFavItems"));
             el15.click();
 
@@ -109,11 +117,11 @@ public class reorderTest {
             WebElement el11 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/tvReOrder\").instance(0)"));
             el11.click();
 
-            Thread.sleep(9000);
+            Thread.sleep(10000);
             WebElement el145 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
             el145.click();
 
-            Thread.sleep(5000);
+            Thread.sleep(7000);
             WebElement pickup = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_pickup"));
             pickup.click();
             test.pass("Selected Pickup");
@@ -124,7 +132,7 @@ public class reorderTest {
             test.pass("Clicked Proceed");
 
 
-            Thread.sleep(10000);
+            Thread.sleep(30000);
             WebElement el5 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivCancel"));
             el5.click();
 
@@ -144,14 +152,14 @@ public class reorderTest {
             try {
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"7\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"12\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '7' selected from picker");
+                test.pass("Time '12' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '7' not found in time picker");
+                test.fail("Value '12' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -159,7 +167,7 @@ public class reorderTest {
 //            amPm.click();
 //            test.pass("Selected PM");
 
-            Thread.sleep(5000);
+            Thread.sleep(7000);
             WebElement okBtn = driver.findElement(AppiumBy.id("android:id/button1"));
             okBtn.click();
             test.pass("Confirmed time");
@@ -169,9 +177,7 @@ public class reorderTest {
             proceed2.click();
             test.pass("Clicked Proceed again");
 
-
-
-            Thread.sleep(10000);
+            Thread.sleep(30000);
 
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(455, 1872);
@@ -186,7 +192,7 @@ public class reorderTest {
             driver.perform(Arrays.asList(swipe));
 
             Thread.sleep(5000);
-            WebElement onlinePayment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(1)"));
+            WebElement onlinePayment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
             onlinePayment.click();
             test.pass("Clicked onlinePayment ");
 
@@ -195,64 +201,46 @@ public class reorderTest {
             confirmButton.click();
             test.pass("Clicked confirm Button ");
 
-
+            Thread.sleep(90000);
             test = extent.createTest("Payment method").assignCategory("Regression");
 
-            Set<String> contexts = driver.getContextHandles();
-            for (String context : contexts) {
-                System.out.println("Available context: " + context);
+            Set<String> contextNames = driver.getContextHandles();
+            for (String contextName : contextNames) {
+                System.out.println(contextName);
             }
+            driver.context((String) contextNames.toArray()[0]);
 
-// 3. Switch to WebView context
-            for (String context : contexts) {
-                if (context.contains("WEBVIEW")) {
-                    driver.context(context);
-                    break;
-                }
-            }
+            driver.context("NATIVE_APP");
+            System.out.println(driver.getPageSource());
 
-            Thread.sleep(50000);
-//            WebElement cardHolderName = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ccName\")"));
-            driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"ccName\"]")).sendKeys("Test");
-
-//            WebElement cardHolderName = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"ccName\"]"));
-//            cardHolderName.click();
-//            cardHolderName.sendKeys("test");
+            Thread.sleep(60000);
+            WebElement cardHolderName = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ccName\")"));
+            cardHolderName.click();
+            cardHolderName.sendKeys("test");
             test.pass("Clicked cardHolderName ");
 
             Thread.sleep(5000);
-//            WebElement cardNumber = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ccNum\")"));
-            driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"ccNum\"]")).sendKeys("4111111111111111");
-//            WebElement cardNumber = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"ccNum\"]"));
-//            cardNumber.click();
-//            cardNumber.sendKeys("4111111111111111");
+            WebElement cardNumber = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ccNum\")"));
+            cardNumber.click();
+            cardNumber.sendKeys("4111111111111111");
             test.pass("entered cardNumber");
 
             Thread.sleep(5000);
-//            WebElement cardExpiry = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"expiry\")"));
-            driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"expiry\"]")).sendKeys("12/28");
-
-//            WebElement cardExpiry = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"expiry\"]"));
-//            cardExpiry.click();
-//            cardExpiry.sendKeys("12/28");
+            WebElement cardExpiry = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"expiry\")"));
+            cardExpiry.click();
+            cardExpiry.sendKeys("12/28");
             test.pass("entered cardExpiry");
 
             Thread.sleep(5000);
-//            WebElement cardCVV = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"cvv\")"));
-            driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"cvv\"]")).sendKeys("128");
-
-//            WebElement cardCVV = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"cvv\"]"));
-//            cardCVV.click();
-//            cardCVV.sendKeys("128");
+            WebElement cardCVV = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"cvv\")"));
+            cardCVV.click();
+            cardCVV.sendKeys("128");
             test.pass("entered cardCVV");
 
             Thread.sleep(5000);
-//            WebElement cardZip = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"zip\")"));
-            driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"zip\"]")).sendKeys("M14A12");
-
-//            WebElement cardZip = driver.findElement(AppiumBy.xpath("//android.widget.EditText[@resource-id=\"zip\"]"));
-//            cardZip.click();
-//            cardZip.sendKeys("M14A12");
+            WebElement cardZip = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"zip\")"));
+            cardZip.click();
+            cardZip.sendKeys("M14A12");
             test.pass("entered cardZip");
 
             Thread.sleep(5000);
@@ -265,14 +253,13 @@ public class reorderTest {
             Done.click();
             test.pass("Clicked Done Button");
 
-
+            Thread.sleep(20000);
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
     }
-
 
     @AfterClass
     public void tearDown() {

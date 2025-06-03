@@ -283,6 +283,9 @@ public class ArbysPaymentAutomation{
             done.click();
             test.pass("Clicked on Done payment");
 
+            WebElement redone = driver.findElement(AppiumBy.accessibilityId("Done"));
+            redone.click();
+
             Thread.sleep(10000);
 
         } catch (Exception e) {

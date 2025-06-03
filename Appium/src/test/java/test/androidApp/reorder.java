@@ -1,7 +1,5 @@
 package test.androidApp;
 
-import android.webkit.WebView;
-import android.webkit.WebSettings;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -10,7 +8,6 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.var;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -29,7 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 
-public class reorderTest {
+public class reorder {
 
     AndroidDriver driver;
     ExtentReports extent;

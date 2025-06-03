@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.var;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class orderHistoryTrackOrder {
+public class orderHistoryTrack {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -34,12 +35,18 @@ public class orderHistoryTrackOrder {
         extent.attachReporter(spark);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Pixel 7");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("automationName", "uiautomator2");
-        capabilities.setCapability("app","/Users/apple/Downloads/Arby'sBuzzparadeSigned_nounattendedcartblock.apk");
-        capabilities.setCapability("platformVersion", "14");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
         capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
         driver = new AndroidDriver(url, capabilities);

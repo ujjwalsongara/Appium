@@ -18,7 +18,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;

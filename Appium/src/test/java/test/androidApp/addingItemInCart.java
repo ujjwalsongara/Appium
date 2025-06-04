@@ -350,8 +350,6 @@ public class addingItemInCart {
 //
 
 
-
-
             Thread.sleep(40000);
             WebElement el23 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivPlus"));
             el23.click();
@@ -478,8 +476,6 @@ public class addingItemInCart {
             Thread.sleep(5000);
             WebElement el42 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
             el42.click();
-
-
 
 
         } catch (Exception e) {

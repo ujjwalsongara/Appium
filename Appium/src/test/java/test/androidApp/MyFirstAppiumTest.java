@@ -1,22 +1,20 @@
 package test.androidApp;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.NoSuchElementException;
-
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.*;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.AndroidDriver;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.NoSuchElementException;
 
 public class MyFirstAppiumTest {
 

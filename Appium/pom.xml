@@ -60,11 +60,11 @@
 
 
 
-    <dependency>
-        <groupId>androidx.webkit</groupId>
-        <artifactId>webkit</artifactId>
-        <version>1.13.0</version>
-    </dependency>
+<!--    <dependency>-->
+<!--        <groupId>androidx.webkit</groupId>-->
+<!--        <artifactId>webkit</artifactId>-->
+<!--        <version>1.13.0</version>-->
+<!--    </dependency>-->
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

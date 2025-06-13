@@ -31,7 +31,7 @@ public class csatForIos {
 
     @Test
     public void rateYourOrder() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyRateOrderIOS.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyRateOrderiOS.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 

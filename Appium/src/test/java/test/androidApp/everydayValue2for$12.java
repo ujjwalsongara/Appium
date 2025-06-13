@@ -25,16 +25,15 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class LTOJalapenoRoastBeefCheddarMeal {
-
+public class everydayValue2for$12 {
 
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
 
     @Test
-    public void LTOMeal() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyLTO.html");
+    public void everyday2for$12() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -101,38 +100,12 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             signIn.click();
             test.pass("Clicked on Sign In");
 
-            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
+            test = extent.createTest("pickup Flow Test").assignCategory("Regression");
 
             Thread.sleep(10000);
-            WebElement menu = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_menu"));
-            menu.click();
-            test.pass("Clicked on menu");
-
-            Thread.sleep(7000);
-            WebElement LTO = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivMenuItem\").instance(0)"));
-            LTO.click();
-            test.pass("Clicked on LTO");
-
-            Thread.sleep(5000);
-            WebElement viewItem = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btAddCart"));
-            viewItem.click();
-            test.pass("Clicked on viewItem");
-
-            Thread.sleep(9000);
-            WebElement selectTheStore = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/clAddCart"));
-            selectTheStore.click();
-            test.pass("Clicked on selectTheStore");
-
-            Thread.sleep(5000);
-            WebElement pickup = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_pickup"));
-            pickup.click();
-            test.pass("Selected Pickup");
-
-            Thread.sleep(5000);
-            WebElement proceed = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
-            proceed.click();
-            test.pass("Clicked Proceed");
-
+            WebElement pickupBtn = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.ImageView\").instance(5)"));
+            pickupBtn.click();
+            test.pass("Clicked on pickup");
 
             Thread.sleep(50000);
             WebElement el15 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivCancel"));
@@ -161,7 +134,7 @@ public class LTOJalapenoRoastBeefCheddarMeal {
                 test.pass("Time '7' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '7' not found in time picker");
+                test.fail("Value '6' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -179,11 +152,42 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             proceed2.click();
             test.pass("Clicked Proceed again");
 
-            Thread.sleep(90000);
+            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
+
+//            Thread.sleep(10000);
+//            WebElement menu = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_menu"));
+//            menu.click();
+//            test.pass("Clicked on menu");
+
+            Thread.sleep(10000);
+            WebElement EveryDay = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivMenuItem\").instance(4)"));
+            EveryDay.click();
+            test.pass("Clicked on EveryDay2for$12");
+
+            Thread.sleep(9000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(541, 1798);
-            var end = new Point (528, 684);
+            var start = new Point(586, 1700);
+            var end = new Point (557, 926);
             var swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
+            Thread.sleep(7000);
+            WebElement viewItem = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/btAddCart\").instance(2)"));
+            viewItem.click();
+            test.pass("Clicked on viewItem");
+
+
+            Thread.sleep(90000);
+             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+             start = new Point(635, 1761);
+             end = new Point (541, 590);
+             swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -194,8 +198,8 @@ public class LTOJalapenoRoastBeefCheddarMeal {
 
 
               finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(532, 1491);
-             end = new Point (541, 401);
+             start = new Point(401, 1937);
+             end = new Point (373, 696);
              swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -205,27 +209,14 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(491, 1593);
-             end = new Point (491, 1118);
-             swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(5000);
-            WebElement beverage = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivMaxMin"));
-            beverage.click();
+            Thread.sleep(9000);
+            WebElement Beverage = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivMaxMin\").instance(2)"));
+            Beverage.click();
             test.pass("Clicked on Beverage");
 
              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(573, 1716);
-             end = new Point (614, 602);
+             start = new Point(405, 1925);
+             end = new Point (410, 1057);
              swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -235,17 +226,17 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(7000);
-            WebElement drink = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivPlus\").instance(2)"));
-            drink.click();
-            test.pass("Clicked on drink");
+            Thread.sleep(9000);
+            WebElement item = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivPlus\").instance(2)"));
+            item.click();
+            test.pass("added item");
 
             Thread.sleep(7000);
             WebElement addCart = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/clAddCart"));
             addCart.click();
             test.pass("Clicked on AddCart");
 
-            Thread.sleep(7000);
+            Thread.sleep(10000);
             WebElement viewCart = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvNegative"));
             viewCart.click();
             test.pass("Clicked on viewCart");
@@ -265,10 +256,10 @@ public class LTOJalapenoRoastBeefCheddarMeal {
 
             Thread.sleep(50000);
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(381, 1749);
-             end = new Point(426, 962);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(381, 1749);
+            end = new Point(426, 962);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));

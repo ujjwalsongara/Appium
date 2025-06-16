@@ -21,6 +21,7 @@ import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Set;
 
 public class csatRateYourOrder {
 
@@ -115,7 +116,7 @@ public class csatRateYourOrder {
 
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(414, 1843);
-            var end = new Point (410, 1065);
+            var end = new Point(410, 1065);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -125,14 +126,23 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
+            Set<String> contextNames = driver.getContextHandles();
+            for (String contextName : contextNames) {
+                System.out.println(contextName);
+            }
+            driver.context((String) contextNames.toArray()[0]);
+
+            driver.context("NATIVE_APP");
+            System.out.println(driver.getPageSource());
+
             Thread.sleep(3000);
             WebElement el16 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvRateOrder"));
             el16.click();
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(303, 1794);
-             end = new Point (344, 831);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(303, 1794);
+            end = new Point(344, 831);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -141,14 +151,14 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(30000);
+            Thread.sleep(5000);
             WebElement el17 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"EXTREMELY SATISFIED\")"));
             el17.click();
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(188, 1601);
-             end = new Point (209, 635);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(188, 1601);
+            end = new Point(209, 635);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -157,10 +167,10 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(139, 1675);
-             end = new Point (221, 750);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(139, 1675);
+            end = new Point(221, 750);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -169,14 +179,14 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             WebElement el18 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"EXTREMELY SATISFIED\")"));
             el18.click();
 
-              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(115, 1798);
-             end = new Point (90, 1028);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(115, 1798);
+            end = new Point(90, 1028);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -186,10 +196,10 @@ public class csatRateYourOrder {
             driver.perform(Arrays.asList(swipe));
 
 
-              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(119, 1638);
-             end = new Point (70, 885);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(119, 1638);
+            end = new Point(70, 885);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -197,8 +207,6 @@ public class csatRateYourOrder {
                     PointerInput.Origin.viewport(), end.getX(), end.getY()));
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
-
-
 
 
         } catch (Exception e) {

@@ -111,7 +111,7 @@ public class orderHistoryTrack {
 
             final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(553, 1753);
-            var end = new Point (573, 1130);
+            var end = new Point(573, 1130);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));

@@ -25,17 +25,15 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-
-public class reorder {
+public class everydayValue2for$12 {
 
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
 
     @Test
-    public void reOrder() throws MalformedURLException, InterruptedException {
-
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyReOrder1.html");
+    public void everyday2for$12() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -62,12 +60,12 @@ public class reorder {
             Thread.sleep(2000);
             test.info("Application started");
 
-            Thread.sleep(6000);
+            Thread.sleep(3000);
             WebElement skipButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btnSkip"));
             skipButton.click();
             test.pass("Clicked on Skip");
 
-            Thread.sleep(9000);
+            Thread.sleep(5000);
             WebElement allowButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
             allowButton.click();
             test.pass("Clicked on Allow button");
@@ -102,38 +100,16 @@ public class reorder {
             signIn.click();
             test.pass("Clicked on Sign In");
 
-            test = extent.createTest("Order History").assignCategory("Regression");
-
-            Thread.sleep(20000);
-            WebElement el14 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_track"));
-            el14.click();
-
-            Thread.sleep(7000);
-            WebElement el15 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvFavItems"));
-            el15.click();
-
-            Thread.sleep(5000);
-            WebElement el11 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/tvReOrder\").instance(0)"));
-            el11.click();
+            test = extent.createTest("pickup Flow Test").assignCategory("Regression");
 
             Thread.sleep(10000);
-            WebElement el145 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
-            el145.click();
+            WebElement pickupBtn = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.ImageView\").instance(5)"));
+            pickupBtn.click();
+            test.pass("Clicked on pickup");
 
-            Thread.sleep(7000);
-            WebElement pickup = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_pickup"));
-            pickup.click();
-            test.pass("Selected Pickup");
-
-            Thread.sleep(5000);
-            WebElement proceed = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
-            proceed.click();
-            test.pass("Clicked Proceed");
-
-
-            Thread.sleep(30000);
-            WebElement el5 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivCancel"));
-            el5.click();
+            Thread.sleep(50000);
+            WebElement el15 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/ivCancel"));
+            el15.click();
 
             Thread.sleep(5000);
             WebElement el38 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvFavourite"));
@@ -151,14 +127,14 @@ public class reorder {
             try {
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"1\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"7\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '1' selected from picker");
+                test.pass("Time '7' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '1' not found in time picker");
+                test.fail("Value '6' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -176,11 +152,22 @@ public class reorder {
             proceed2.click();
             test.pass("Clicked Proceed again");
 
-            Thread.sleep(30000);
+            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
 
+//            Thread.sleep(10000);
+//            WebElement menu = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_menu"));
+//            menu.click();
+//            test.pass("Clicked on menu");
+
+            Thread.sleep(10000);
+            WebElement EveryDay = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivMenuItem\").instance(4)"));
+            EveryDay.click();
+            test.pass("Clicked on EveryDay2for$12");
+
+            Thread.sleep(9000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(455, 1872);
-            var end = new Point(545, 745);
+            var start = new Point(586, 1700);
+            var end = new Point (557, 926);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -190,18 +177,111 @@ public class reorder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(5000);
-            WebElement onlinePayment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
-            onlinePayment.click();
-            test.pass("Clicked onlinePayment ");
+            Thread.sleep(7000);
+            WebElement viewItem = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/btAddCart\").instance(2)"));
+            viewItem.click();
+            test.pass("Clicked on viewItem");
 
-            Thread.sleep(5000);
-            WebElement confirmButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
-            confirmButton.click();
-            test.pass("Clicked confirm Button ");
 
             Thread.sleep(90000);
+             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+             start = new Point(635, 1761);
+             end = new Point (541, 590);
+             swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
+
+              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+             start = new Point(401, 1937);
+             end = new Point (373, 696);
+             swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
+            Thread.sleep(9000);
+            WebElement Beverage = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivMaxMin\").instance(2)"));
+            Beverage.click();
+            test.pass("Clicked on Beverage");
+
+             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+             start = new Point(405, 1925);
+             end = new Point (410, 1057);
+             swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
+            Thread.sleep(9000);
+            WebElement item = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/ivPlus\").instance(2)"));
+            item.click();
+            test.pass("added item");
+
+            Thread.sleep(7000);
+            WebElement addCart = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/clAddCart"));
+            addCart.click();
+            test.pass("Clicked on AddCart");
+
+            Thread.sleep(10000);
+            WebElement viewCart = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvNegative"));
+            viewCart.click();
+            test.pass("Clicked on viewCart");
+
+//            Thread.sleep(50000);
+//            WebElement proceed2B = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
+//            proceed2B.click();
+//            test.pass("Clicked Proceed again");
+
+//            Thread.sleep(9000);
+//            WebElement el25 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_home"));
+//            el25.click();
+//
+//            Thread.sleep(20000);
+//            WebElement el26 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_cart"));
+//            el26.click();
+
+            Thread.sleep(50000);
+
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(381, 1749);
+            end = new Point(426, 962);
+            swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
+
+            Thread.sleep(7000);
+            WebElement payment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
+            payment.click();
+            test.pass("Clicked on payment");
+
+            Thread.sleep(3000);
+            WebElement checkout = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
+            checkout.click();
+            test.pass("Clicked on checkout");
+
             test = extent.createTest("Payment method").assignCategory("Regression");
+
+            Thread.sleep(70000);
 
             Set<String> contextNames = driver.getContextHandles();
             for (String contextName : contextNames) {
@@ -253,6 +333,7 @@ public class reorder {
             test.pass("Clicked Done Button");
 
             Thread.sleep(20000);
+            test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());

@@ -39,18 +39,7 @@ public class reorder {
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("ensureWebviewsHavePages", true);
-        capabilities.setCapability("nativeWebScreenshot", true);
-        capabilities.setCapability("newCommandTimeout", 3600);
-        capabilities.setCapability("connectHardwareKeyboard", true);
+        DesiredCapabilities capabilities = getAndroidDriver();
 
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
@@ -258,6 +247,22 @@ public class reorder {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
+    }
+
+    private static DesiredCapabilities getAndroidDriver() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
     }
 
     @AfterClass

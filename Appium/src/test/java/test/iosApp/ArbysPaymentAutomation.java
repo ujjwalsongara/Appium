@@ -36,24 +36,7 @@ public class ArbysPaymentAutomation {
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-        capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true); // Grant all permissions
-//        capabilities.setCapability("ios"," /Users/apple/Downloads/Arbys.app");
-//        capabilities.setCapability("bundleId", "com.buzzparade.arbysinternational");
-//        capabilities.setCapability("fullReset", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("newCommandTimeout", 7000);
-//        capabilities.setCapability("udid", "A9864702-9691-4A3C-B34B-F60C2A3099A2");  // Required for real devices
-
-
-        URL serverURL = new URL("http://127.0.0.1:4723/");
-        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        IOSDriver driver = getIosDriver();
 
 //        URL url = URI.create("http://127.0.0.1:4723/").toURL();
 //        driver = new AndroidDriver(url, capabilities);
@@ -290,6 +273,28 @@ public class ArbysPaymentAutomation {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
+    }
+
+    private static IOSDriver getIosDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("autoGrantPermissions", true); // Grant all permissions
+//        capabilities.setCapability("ios"," /Users/apple/Downloads/Arbys.app");
+//        capabilities.setCapability("bundleId", "com.buzzparade.arbysinternational");
+//        capabilities.setCapability("fullReset", true);
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 7000);
+//        capabilities.setCapability("udid", "A9864702-9691-4A3C-B34B-F60C2A3099A2");  // Required for real devices
+
+
+        URL serverURL = new URL("http://127.0.0.1:4723/");
+        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
     }
 
 

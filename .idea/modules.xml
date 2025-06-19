@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppiumAutomation.iml" filepath="$PROJECT_DIR$/AppiumAutomation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Appium.iml" filepath="$PROJECT_DIR$/.idea/Appium.iml" />
     </modules>
   </component>
 </project>

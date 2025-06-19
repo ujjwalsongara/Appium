@@ -102,7 +102,6 @@ public class csatRateYourOrder {
 
             test = extent.createTest("RateYourOrder").assignCategory("Regression");
 
-
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(414, 1843);
             var end = new Point(410, 1065);
@@ -124,7 +123,7 @@ public class csatRateYourOrder {
             driver.context("NATIVE_APP");
             System.out.println(driver.getPageSource());
 
-            Thread.sleep(3000);
+            Thread.sleep(50000);
             WebElement el16 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvRateOrder"));
             el16.click();
 
@@ -140,7 +139,7 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(5000);
+            Thread.sleep(50000);
             WebElement el17 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"EXTREMELY SATISFIED\")"));
             el17.click();
 

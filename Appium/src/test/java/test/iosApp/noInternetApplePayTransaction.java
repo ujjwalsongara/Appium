@@ -28,16 +28,16 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Set;
 
-public class arbyApplePayPayment {
+public class noInternetApplePayTransaction {
 
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
 
     @Test
-    public void ApplePayPayment() throws MalformedURLException, InterruptedException {
+    public void noInternetApplePayPayment() throws MalformedURLException, InterruptedException {
 
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyApplePayIOS.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbynoInternetApplePayPayment.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -247,14 +247,16 @@ public class arbyApplePayPayment {
             paymentMode.click();
             test.pass("Clicked on paymentMode");
 
-            Set<String> contextNames = driver.getContextHandles();
-            for (String contextName : contextNames) {
-                System.out.println(contextName);
-            }
-            driver.context((String) contextNames.toArray()[0]);
+            test = extent.createTest("Payment method No Internet error").assignCategory("Regression");
 
-            driver.context("NATIVE_APP");
-            System.out.println(driver.getPageSource());
+//            Set<String> contextNames = driver.getContextHandles();
+//            for (String contextName : contextNames) {
+//                System.out.println(contextName);
+//            }
+//            driver.context((String) contextNames.toArray()[0]);
+//
+//            driver.context("NATIVE_APP");
+//            System.out.println(driver.getPageSource());
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             WebElement checkOutToApplePay = wait.until(
@@ -264,8 +266,24 @@ public class arbyApplePayPayment {
             checkOutToApplePay.click();
             test.pass("Clicked on checkOutToApplePay");
 
-            Thread.sleep(7000);
-            test = extent.createTest("Payment method").assignCategory("Regression");
+            Thread.sleep(3000);
+
+//            WebElement payWithApplePay = driver.findElement(AppiumBy.iOSNsPredicateString("label == 'Pay with Passcode'"));
+//            payWithApplePay.click();
+
+            try {
+                WebElement errorAlert = driver.findElement(AppiumBy.iOSNsPredicateString("label CONTAINS 'No Internet Connection Detected'"));
+                Assert.assertTrue(errorAlert.isDisplayed(), "Apple Pay error displayed as expected.");
+                test.pass("Error message for no internet connection is displayed correctly.");
+
+//                WebElement okButton = driver.findElement(AppiumBy.iOSNsPredicateString("label == 'OK' AND type == 'XCUIElementTypeButton'"));
+//                okButton.click(); // Optionally dismiss the alert
+//                test.pass("Clicked OK on internet error alert.");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Expected no-internet alert was not displayed.");
+                Assert.fail("No-internet connection alert not shown during Apple Pay checkout.");
+            }
 
 //            JavascriptExecutor js = (JavascriptExecutor) driver;
 //            Map<String, Object> args = new HashMap<>();
@@ -274,79 +292,14 @@ public class arbyApplePayPayment {
 //            js.executeScript("mobile: performEditorAction", args);
 //
 
-            WebDriverWait waiti = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement payBtn = waiti.until(
-                    ExpectedConditions.elementToBeClickable(
-                            By.id("Pay with Passcode")
-                    )
-            );
-            payBtn.click();
-            test.pass("Clicked on payWithPassCode");
-//
-//            WebElement payWithCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"PAY WITH ANOTHER CARD\"`]"));
-//            payWithCard.click();
-//            test.pass("Clicked on payWithCard");
-//
-//            Set<String> contextNames = driver.getContextHandles();
-//            for (String contextName : contextNames) {
-//                System.out.println(contextName);
-//            }
-//            driver.context((String) contextNames.toArray()[0]);
-//
-//            driver.context("NATIVE_APP");
-//            System.out.println(driver.getPageSource());
-//
-//
-//            Thread.sleep(50000);
-//            WebElement cardName = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Name on Card\"`]"));
-//            cardName.click();
-//            cardName.sendKeys("test");
-//            test.pass("enter cardName");
-//
-//            Thread.sleep(5000);
-//            WebElement cardNumber = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Card Number\"`]"));
-//            cardNumber.click();
-//            cardNumber.sendKeys("41111111111111111");
-//            test.pass("enter card Number");
-//
-//            Thread.sleep(5000);
-//            WebElement expiryDate = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Expiry Date\"`]"));
-//            expiryDate.sendKeys("12/28");
-//            test.pass("enter expiryDate");
-//
-//            Thread.sleep(5000);
-//            WebElement cvv = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"CVV\"`]"));
-//            cvv.click();
-//            cvv.sendKeys("128");
-//            test.pass("enter cvv");
-//
-//            Thread.sleep(5000);
-//            WebElement postalCode = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Postal Code\"`]"));
-//            postalCode.click();
-//            postalCode.sendKeys("M14A12");
-//            test.pass("enter postalCode");
-//
-//            Thread.sleep(5000);
-//
-//            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-//            start = new Point(258, 336);
-//            end = new Point(259, 194);
-//            swipe = new Sequence(finger, 1);
-//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-//            driver.perform(Arrays.asList(swipe));
-//
-//            Thread.sleep(5000);
-//            WebElement done = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`][1]"));
-//            done.click();
-//            test.pass("Clicked on Done payment");
-//
-//            WebElement redone = driver.findElement(AppiumBy.accessibilityId("Done"));
-//            redone.click();
+//            WebDriverWait waiti = new WebDriverWait(driver, Duration.ofSeconds(10));
+//            WebElement payBtn = waiti.until(
+//                    ExpectedConditions.elementToBeClickable(
+//                            By.id("Pay with Passcode")
+//                    )
+//            );
+//            payBtn.click();
+//            test.pass("Clicked on payWithPassCode");
 
             Thread.sleep(10000);
 
@@ -363,8 +316,8 @@ public class arbyApplePayPayment {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
         capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-        capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true);
+//        capabilities.setCapability("autoAcceptAlerts", true);
+//        capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("newCommandTimeout", 7000);
         capabilities.setCapability("enableApplePay", true);
@@ -383,5 +336,6 @@ public class arbyApplePayPayment {
             extent.flush();
         }
     }
+
 
 }

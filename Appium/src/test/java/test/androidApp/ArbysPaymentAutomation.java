@@ -7,6 +7,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+@Slf4j
 public class ArbysPaymentAutomation {
 
     AndroidDriver driver;
@@ -53,6 +55,7 @@ public class ArbysPaymentAutomation {
             WebElement skipButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btnSkip"));
             skipButton.click();
             test.pass("Clicked on Skip");
+
 
             Thread.sleep(5000);
             WebElement allowButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
@@ -135,14 +138,14 @@ public class ArbysPaymentAutomation {
             try {
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"1\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"11\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '1' selected from picker");
+                test.pass("Time '11' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '1' not found in time picker");
+                test.fail("Value '11' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -185,7 +188,7 @@ public class ArbysPaymentAutomation {
             test = extent.createTest("payment Flow Test").assignCategory("Regression");
 
             Thread.sleep(7000);
-            WebElement el23 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
+            WebElement el23 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(2)"));
             el23.click();
 
             Thread.sleep(3000);

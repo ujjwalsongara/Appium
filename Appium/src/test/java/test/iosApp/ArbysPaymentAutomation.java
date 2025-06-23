@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -21,7 +22,9 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class ArbysPaymentAutomation {
@@ -174,14 +177,42 @@ public class ArbysPaymentAutomation {
             Thread.sleep(5000);
 
             try {
-                WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
-                pickerWheel.sendKeys("4"); // Set the desired value
-                test.pass("Time '4' selected from picker");
+                // Step 1: Get current time
+                int currentHour = LocalTime.now().getHour();
 
-            } catch (NoSuchElementException e) {
-                test.fail("Value '4' not found in time picker");
-                Assert.fail("Time picker failed");
+                // Step 2: Convert to 12-hour format and add 1 hour
+                int nextHour = (currentHour + 1) % 12;
+                if (nextHour == 0) nextHour = 12;
+
+                String nextHourStr = String.valueOf(nextHour);
+
+                // Step 3: Find the iOS picker wheel
+                List<WebElement> pickerWheels = driver.findElements(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
+
+                if (!pickerWheels.isEmpty()) {
+                    // Assume first wheel is for hours
+                    WebElement hourPicker = pickerWheels.get(0);
+                    hourPicker.sendKeys(nextHourStr);
+                    test.pass("Time '" + nextHourStr + "' selected in picker");
+                } else {
+                    test.fail("No picker wheel found");
+                    Assert.fail("Failed to locate time picker wheel");
+                }
+
+            } catch (Exception e) {
+                test.fail("Exception while selecting time: " + e.getMessage());
+                e.printStackTrace();
             }
+
+//            try {
+//                WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
+//                pickerWheel.sendKeys("4"); // Set the desired value
+//                test.pass("Time '4' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '4' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
 
             Thread.sleep(5000);
             WebElement timeDrop = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
@@ -289,7 +320,29 @@ public class ArbysPaymentAutomation {
             WebElement redone = driver.findElement(AppiumBy.accessibilityId("Done"));
             redone.click();
 
-            Thread.sleep(10000);
+            Thread.sleep(50000);
+
+            try {
+                WebElement successMsg = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'ORDER SUCCESSFULLY PLACED'")
+                );
+                WebElement trackOrderBtn = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'TRACK ORDER'")
+                );
+
+                Assert.assertTrue(successMsg.isDisplayed(), "Success message is visible");
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is visible");
+
+                test.pass("Order confirmation popup verified successfully");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Order confirmation popup elements not found");
+                Assert.fail("Popup did not appear as expected");
+            }
+
+
+            test.pass("Final checkout completed");
+
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());

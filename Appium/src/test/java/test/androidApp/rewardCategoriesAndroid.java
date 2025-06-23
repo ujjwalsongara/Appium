@@ -33,6 +33,22 @@ public class rewardCategoriesAndroid {
     ExtentReports extent;
     ExtentTest test;
 
+    private static DesiredCapabilities getAndroidDriver() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
+
     @Test
     public void rewardCategories() throws MalformedURLException, InterruptedException {
         ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyRewardCategoriesAndroid.html");
@@ -116,8 +132,6 @@ public class rewardCategoriesAndroid {
             signatureMeatsItem.click();
             test.pass("Clicked on signature Meats");
 
-
-
             Thread.sleep(7000);
             List<WebElement> convertPointList = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
 
@@ -178,7 +192,6 @@ public class rewardCategoriesAndroid {
             WebElement timePicker = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/edt_time"));
             timePicker.click();
             test.pass("Opened time picker");
-
 
             try {
 
@@ -280,31 +293,25 @@ public class rewardCategoriesAndroid {
             checkout.click();
             test.pass("Clicked on checkout");
 
-
-
             Thread.sleep(70000);
+
+            try {
+                WebElement trackOrderBtn = driver.findElement(
+                        AppiumBy.androidUIAutomator("new UiSelector().text(\"TRACK ORDER\")")
+                );
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is displayed");
+                test.pass("Verified: Track Order button present in success popup.");
+            } catch (NoSuchElementException e) {
+                test.fail("Track Order button not found.");
+                Assert.fail("Order confirmation popup failed.");
+            }
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
-    }
-
-    private static DesiredCapabilities getAndroidDriver() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("ensureWebviewsHavePages", true);
-        capabilities.setCapability("nativeWebScreenshot", true);
-        capabilities.setCapability("newCommandTimeout", 3600);
-        capabilities.setCapability("connectHardwareKeyboard", true);
-        return capabilities;
     }
 
     @AfterClass

@@ -28,6 +28,22 @@ public class orderHistoryTrack {
     ExtentReports extent;
     ExtentTest test;
 
+    private static DesiredCapabilities getAndroidDriver() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
+
     @Test
     public void trackOrder() throws MalformedURLException, InterruptedException {
         ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbytrackOrder.html");
@@ -116,23 +132,6 @@ public class orderHistoryTrack {
             Assert.fail(e.getMessage());
         }
     }
-
-    private static DesiredCapabilities getAndroidDriver() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("ensureWebviewsHavePages", true);
-        capabilities.setCapability("nativeWebScreenshot", true);
-        capabilities.setCapability("newCommandTimeout", 3600);
-        capabilities.setCapability("connectHardwareKeyboard", true);
-        return capabilities;
-    }
-
 
     @AfterClass
     public void tearDown() {

@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -29,6 +30,23 @@ public class noInternetGooglePayTransaction {
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
+
+    private static DesiredCapabilities getAndroidDriver() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(MobileCapabilityType.APP, "//Users/apple/Downloads/app-dev_Intl-debug.apk");
+//        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("ensureWebviewsHavePages", true);
+        capabilities.setCapability("nativeWebScreenshot", true);
+        capabilities.setCapability("newCommandTimeout", 3600);
+        capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
 
     @Test
     public void noInternetGooglePayPayment() throws MalformedURLException, InterruptedException {
@@ -113,18 +131,43 @@ public class noInternetGooglePayTransaction {
             test.pass("Opened time picker");
 
             try {
+
+                int currentHour = LocalTime.now().getHour();
+                int nextHour = (currentHour + 1) % 12;
+                if (nextHour == 0) nextHour = 12;
+
+                String hourToSelect = String.valueOf(nextHour);
+
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"12\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true))" +
+                                        ".scrollIntoView(new UiSelector().text(\"" + hourToSelect + "\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '12' selected from picker");
+                test.pass("Time '" + hourToSelect + "' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '12' not found in time picker");
+                test.fail("Next hour time value not found in time picker");
                 Assert.fail("Time picker failed");
+            } catch (Exception e) {
+                test.fail("Unexpected error while selecting time: " + e.getMessage());
+                e.printStackTrace();
             }
+
+//            try {
+//                WebElement element = driver.findElement(
+//                        MobileBy.AndroidUIAutomator(
+//                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"12\"))"
+//                        )
+//                );
+//                element.click();
+//                test.pass("Time '12' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '12' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
 
 //            WebElement amPm = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"p.m.\")"));
 //            amPm.click();
@@ -221,19 +264,6 @@ public class noInternetGooglePayTransaction {
             viewCart.click();
             test.pass("Clicked on viewCart");
 
-//            Thread.sleep(50000);
-//            WebElement proceed2B = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
-//            proceed2B.click();
-//            test.pass("Clicked Proceed again");
-
-//            Thread.sleep(9000);
-//            WebElement el25 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_home"));
-//            el25.click();
-//
-//            Thread.sleep(20000);
-//            WebElement el26 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_cart"));
-//            el26.click();
-
             Thread.sleep(90000);
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
@@ -280,11 +310,6 @@ public class noInternetGooglePayTransaction {
                 Assert.fail("No-internet connection alert not shown during Google Pay checkout.");
             }
 
-//            Thread.sleep(50000);
-//            WebElement googlePay = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Pay now\")"));
-//            googlePay.click();
-//            test.pass("Clicked on googlePay");
-
             Thread.sleep(70000);
             test.pass("Final checkout completed");
 
@@ -292,22 +317,6 @@ public class noInternetGooglePayTransaction {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
-    }
-
-    private static DesiredCapabilities getAndroidDriver() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("ensureWebviewsHavePages", true);
-        capabilities.setCapability("nativeWebScreenshot", true);
-        capabilities.setCapability("newCommandTimeout", 3600);
-        capabilities.setCapability("connectHardwareKeyboard", true);
-        return capabilities;
     }
 
     @AfterClass

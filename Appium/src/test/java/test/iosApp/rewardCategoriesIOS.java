@@ -29,6 +29,24 @@ public class rewardCategoriesIOS {
     ExtentReports extent;
     ExtentTest test;
 
+    private static IOSDriver getIosDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 7000);
+
+
+        URL serverURL = new URL("http://127.0.0.1:4723/");
+        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
     @Test
     public void payment() throws MalformedURLException, InterruptedException {
         ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportIOSArbyRewardCategoriesIOS.html");
@@ -212,25 +230,6 @@ public class rewardCategoriesIOS {
             Assert.fail(e.getMessage());
         }
     }
-
-    private static IOSDriver getIosDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-        capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("newCommandTimeout", 7000);
-
-
-        URL serverURL = new URL("http://127.0.0.1:4723/");
-        IOSDriver driver = new IOSDriver(serverURL, capabilities);
-        return driver;
-    }
-
 
     @AfterClass
     public void tearDown() {

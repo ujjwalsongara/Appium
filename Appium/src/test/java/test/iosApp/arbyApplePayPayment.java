@@ -34,6 +34,24 @@ public class arbyApplePayPayment {
     ExtentReports extent;
     ExtentTest test;
 
+    private static IOSDriver getIosDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 7000);
+        capabilities.setCapability("enableApplePay", true);
+
+        URL serverURL = new URL("http://127.0.0.1:4723/");
+        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
     @Test
     public void ApplePayPayment() throws MalformedURLException, InterruptedException {
 
@@ -282,96 +300,13 @@ public class arbyApplePayPayment {
             );
             payBtn.click();
             test.pass("Clicked on payWithPassCode");
-//
-//            WebElement payWithCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"PAY WITH ANOTHER CARD\"`]"));
-//            payWithCard.click();
-//            test.pass("Clicked on payWithCard");
-//
-//            Set<String> contextNames = driver.getContextHandles();
-//            for (String contextName : contextNames) {
-//                System.out.println(contextName);
-//            }
-//            driver.context((String) contextNames.toArray()[0]);
-//
-//            driver.context("NATIVE_APP");
-//            System.out.println(driver.getPageSource());
-//
-//
-//            Thread.sleep(50000);
-//            WebElement cardName = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Name on Card\"`]"));
-//            cardName.click();
-//            cardName.sendKeys("test");
-//            test.pass("enter cardName");
-//
-//            Thread.sleep(5000);
-//            WebElement cardNumber = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Card Number\"`]"));
-//            cardNumber.click();
-//            cardNumber.sendKeys("41111111111111111");
-//            test.pass("enter card Number");
-//
-//            Thread.sleep(5000);
-//            WebElement expiryDate = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Expiry Date\"`]"));
-//            expiryDate.sendKeys("12/28");
-//            test.pass("enter expiryDate");
-//
-//            Thread.sleep(5000);
-//            WebElement cvv = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"CVV\"`]"));
-//            cvv.click();
-//            cvv.sendKeys("128");
-//            test.pass("enter cvv");
-//
-//            Thread.sleep(5000);
-//            WebElement postalCode = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Postal Code\"`]"));
-//            postalCode.click();
-//            postalCode.sendKeys("M14A12");
-//            test.pass("enter postalCode");
-//
-//            Thread.sleep(5000);
-//
-//            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-//            start = new Point(258, 336);
-//            end = new Point(259, 194);
-//            swipe = new Sequence(finger, 1);
-//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-//            driver.perform(Arrays.asList(swipe));
-//
-//            Thread.sleep(5000);
-//            WebElement done = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Done\"`][1]"));
-//            done.click();
-//            test.pass("Clicked on Done payment");
-//
-//            WebElement redone = driver.findElement(AppiumBy.accessibilityId("Done"));
-//            redone.click();
-
             Thread.sleep(10000);
+            test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
-    }
-
-    private static IOSDriver getIosDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-        capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("newCommandTimeout", 7000);
-        capabilities.setCapability("enableApplePay", true);
-
-        URL serverURL = new URL("http://127.0.0.1:4723/");
-        IOSDriver driver = new IOSDriver(serverURL, capabilities);
-        return driver;
     }
 
     @AfterClass

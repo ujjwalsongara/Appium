@@ -29,6 +29,23 @@ public class csatForIos {
     ExtentReports extent;
     ExtentTest test;
 
+    private static IOSDriver getIosDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Pro");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 7000);
+
+        URL serverURL = new URL("http://127.0.0.1:4723/");
+        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
     @Test
     public void rateYourOrder() throws MalformedURLException, InterruptedException {
         ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyRateOrderiOS.html");
@@ -133,10 +150,10 @@ public class csatForIos {
             WebElement el10 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"10\"`][2]"));
             el10.click();
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(49, 722);
-             end = new Point (98, 392);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(49, 722);
+            end = new Point(98, 392);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -148,10 +165,10 @@ public class csatForIos {
             WebElement el12 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[34]"));
             el12.click();
 
-              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(104, 726);
-             end = new Point (110, 433);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(104, 726);
+            end = new Point(110, 433);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -163,10 +180,10 @@ public class csatForIos {
             WebElement el13 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[47]"));
             el13.click();
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(313, 735);
-             end = new Point (346, 304);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(313, 735);
+            end = new Point(346, 304);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -178,10 +195,10 @@ public class csatForIos {
             WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeSwitch[`name == \"Beverages\"`]"));
             el14.click();
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(265, 704);
-             end = new Point (271, 324);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(265, 704);
+            end = new Point(271, 324);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -191,10 +208,10 @@ public class csatForIos {
             driver.perform(Arrays.asList(swipe));
 
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(306, 756);
-             end = new Point (271, 180);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(306, 756);
+            end = new Point(271, 180);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -204,10 +221,10 @@ public class csatForIos {
             driver.perform(Arrays.asList(swipe));
 
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(270, 719);
-             end = new Point (289, 327);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(270, 719);
+            end = new Point(289, 327);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -229,23 +246,6 @@ public class csatForIos {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
-    }
-
-    private static IOSDriver getIosDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Pro");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-        capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("newCommandTimeout", 7000);
-
-        URL serverURL = new URL("http://127.0.0.1:4723/");
-        IOSDriver driver = new IOSDriver(serverURL, capabilities);
-        return driver;
     }
 
     @AfterClass

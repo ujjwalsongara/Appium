@@ -1,5 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<!--<?xml version="1.0" encoding="UTF-8" standalone="no"?>-->
+<!--<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">-->
 
 
-<properties/>
+
+<!--<properties/>-->
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AppiumAutomationSuite" parallel="false">
+    <test name="AndroidTests">
+        <packages>
+            <package name="androidApp"/>
+        </packages>
+    </test>
+
+    <test name="iOSTests">
+        <packages>
+            <package name="iosApp"/>
+        </packages>
+    </test>
+</suite>

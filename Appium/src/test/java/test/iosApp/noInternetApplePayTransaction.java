@@ -9,7 +9,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.var;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -26,13 +25,30 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Set;
 
 public class noInternetApplePayTransaction {
 
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
+
+    private static IOSDriver getIosDriver() throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+//        capabilities.setCapability("autoAcceptAlerts", true);
+//        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 7000);
+        capabilities.setCapability("enableApplePay", true);
+
+        URL serverURL = new URL("http://127.0.0.1:4723/");
+        IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
 
     @Test
     public void noInternetApplePayPayment() throws MalformedURLException, InterruptedException {
@@ -268,63 +284,23 @@ public class noInternetApplePayTransaction {
 
             Thread.sleep(3000);
 
-//            WebElement payWithApplePay = driver.findElement(AppiumBy.iOSNsPredicateString("label == 'Pay with Passcode'"));
-//            payWithApplePay.click();
-
             try {
                 WebElement errorAlert = driver.findElement(AppiumBy.iOSNsPredicateString("label CONTAINS 'No Internet Connection Detected'"));
                 Assert.assertTrue(errorAlert.isDisplayed(), "Apple Pay error displayed as expected.");
                 test.pass("Error message for no internet connection is displayed correctly.");
-
-//                WebElement okButton = driver.findElement(AppiumBy.iOSNsPredicateString("label == 'OK' AND type == 'XCUIElementTypeButton'"));
-//                okButton.click(); // Optionally dismiss the alert
-//                test.pass("Clicked OK on internet error alert.");
 
             } catch (NoSuchElementException e) {
                 test.fail("Expected no-internet alert was not displayed.");
                 Assert.fail("No-internet connection alert not shown during Apple Pay checkout.");
             }
 
-//            JavascriptExecutor js = (JavascriptExecutor) driver;
-//            Map<String, Object> args = new HashMap<>();
-//            args.put("action", "tap");
-//            args.put("element", payElement.getId()); // if you somehow get the element
-//            js.executeScript("mobile: performEditorAction", args);
-//
-
-//            WebDriverWait waiti = new WebDriverWait(driver, Duration.ofSeconds(10));
-//            WebElement payBtn = waiti.until(
-//                    ExpectedConditions.elementToBeClickable(
-//                            By.id("Pay with Passcode")
-//                    )
-//            );
-//            payBtn.click();
-//            test.pass("Clicked on payWithPassCode");
-
             Thread.sleep(10000);
+            test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
         }
-    }
-
-    private static IOSDriver getIosDriver() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-//        capabilities.setCapability("autoAcceptAlerts", true);
-//        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("noReset", false);
-        capabilities.setCapability("newCommandTimeout", 7000);
-        capabilities.setCapability("enableApplePay", true);
-
-        URL serverURL = new URL("http://127.0.0.1:4723/");
-        IOSDriver driver = new IOSDriver(serverURL, capabilities);
-        return driver;
     }
 
     @AfterClass

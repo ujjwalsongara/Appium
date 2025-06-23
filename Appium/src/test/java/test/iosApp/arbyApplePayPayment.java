@@ -301,6 +301,25 @@ public class arbyApplePayPayment {
             payBtn.click();
             test.pass("Clicked on payWithPassCode");
             Thread.sleep(10000);
+
+            try {
+                WebElement successMsg = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'ORDER SUCCESSFULLY PLACED'")
+                );
+                WebElement trackOrderBtn = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'TRACK ORDER'")
+                );
+
+                Assert.assertTrue(successMsg.isDisplayed(), "Success message is visible");
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is visible");
+
+                test.pass("Order confirmation popup verified successfully");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Order confirmation popup elements not found");
+                Assert.fail("Popup did not appear as expected");
+            }
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -339,6 +340,26 @@ public class everydayValue2for$12 {
             redone.click();
 
             Thread.sleep(10000);
+
+            try {
+                WebElement successMsg = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'ORDER SUCCESSFULLY PLACED'")
+                );
+                WebElement trackOrderBtn = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'TRACK ORDER'")
+                );
+
+                Assert.assertTrue(successMsg.isDisplayed(), "Success message is visible");
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is visible");
+
+                test.pass("Order confirmation popup verified successfully");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Order confirmation popup elements not found");
+                Assert.fail("Popup did not appear as expected");
+            }
+
+            test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());

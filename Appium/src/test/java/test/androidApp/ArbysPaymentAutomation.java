@@ -7,6 +7,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -21,34 +22,42 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+@Slf4j
 public class ArbysPaymentAutomation {
 
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void setup() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static DesiredCapabilities getAndroidDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability(MobileCapabilityType.APP, "//Users/apple/Downloads/app-dev_Intl-debug.apk");
+//        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("ensureWebviewsHavePages", true);
         capabilities.setCapability("nativeWebScreenshot", true);
         capabilities.setCapability("newCommandTimeout", 3600);
         capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
+
+    @Test
+    public void setup() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyPayment.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        DesiredCapabilities capabilities = getAndroidDriver();
 
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
@@ -65,7 +74,8 @@ public class ArbysPaymentAutomation {
             skipButton.click();
             test.pass("Clicked on Skip");
 
-            Thread.sleep(5000);
+
+            Thread.sleep(7000);
             WebElement allowButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
             allowButton.click();
             test.pass("Clicked on Allow button");
@@ -144,18 +154,43 @@ public class ArbysPaymentAutomation {
             test.pass("Opened time picker");
 
             try {
+
+                int currentHour = LocalTime.now().getHour();
+                int nextHour = (currentHour + 1) % 12;
+                if (nextHour == 0) nextHour = 12;
+
+                String hourToSelect = String.valueOf(nextHour);
+
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"1\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true))" +
+                                        ".scrollIntoView(new UiSelector().text(\"" + hourToSelect + "\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '1' selected from picker");
+                test.pass("Time '" + hourToSelect + "' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '1' not found in time picker");
+                test.fail("Next hour time value not found in time picker");
                 Assert.fail("Time picker failed");
+            } catch (Exception e) {
+                test.fail("Unexpected error while selecting time: " + e.getMessage());
+                e.printStackTrace();
             }
+
+//            try {
+//                WebElement element = driver.findElement(
+//                        MobileBy.AndroidUIAutomator(
+//                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"5\"))"
+//                        )
+//                );
+//                element.click();
+//                test.pass("Time '5' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '5' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
 
 //            WebElement amPm = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"p.m.\")"));
 //            amPm.click();
@@ -171,7 +206,7 @@ public class ArbysPaymentAutomation {
             proceed2.click();
             test.pass("Clicked Proceed again");
 
-            Thread.sleep(9000);
+            Thread.sleep(20000);
             WebElement el25 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_home"));
             el25.click();
 
@@ -196,7 +231,7 @@ public class ArbysPaymentAutomation {
             test = extent.createTest("payment Flow Test").assignCategory("Regression");
 
             Thread.sleep(7000);
-            WebElement el23 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
+            WebElement el23 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(1)"));
             el23.click();
 
             Thread.sleep(3000);
@@ -256,7 +291,19 @@ public class ArbysPaymentAutomation {
             Done.click();
             test.pass("Clicked Done Button");
 
-            Thread.sleep(20000);
+            Thread.sleep(50000);
+
+            try {
+                WebElement trackOrderBtn = driver.findElement(
+                        AppiumBy.androidUIAutomator("new UiSelector().text(\"TRACK ORDER\")")
+                );
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is displayed");
+                test.pass("Verified: Track Order button present in success popup.");
+            } catch (NoSuchElementException e) {
+                test.fail("Track Order button not found.");
+                Assert.fail("Order confirmation popup failed.");
+            }
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {
@@ -264,7 +311,6 @@ public class ArbysPaymentAutomation {
             Assert.fail(e.getMessage());
         }
     }
-
 
     @AfterClass
     public void tearDown() {

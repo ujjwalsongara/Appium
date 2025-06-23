@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -32,24 +33,30 @@ public class LTOJalapenoRoastBeefCheddarMeal {
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void LTOMeal() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyLTO.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static DesiredCapabilities getAndroidDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
+        capabilities.setCapability(MobileCapabilityType.APP, "//Users/apple/Downloads/app-dev_Intl-debug.apk");
+//        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("ensureWebviewsHavePages", true);
         capabilities.setCapability("nativeWebScreenshot", true);
         capabilities.setCapability("newCommandTimeout", 3600);
         capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
+
+    @Test
+    public void LTOMeal() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyLTO.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        DesiredCapabilities capabilities = getAndroidDriver();
 
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
@@ -152,18 +159,43 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             test.pass("Opened time picker");
 
             try {
+
+                int currentHour = LocalTime.now().getHour();
+                int nextHour = (currentHour + 1) % 12;
+                if (nextHour == 0) nextHour = 12;
+
+                String hourToSelect = String.valueOf(nextHour);
+
                 WebElement element = driver.findElement(
                         MobileBy.AndroidUIAutomator(
-                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"7\"))"
+                                "new UiScrollable(new UiSelector().scrollable(true))" +
+                                        ".scrollIntoView(new UiSelector().text(\"" + hourToSelect + "\"))"
                         )
                 );
                 element.click();
-                test.pass("Time '7' selected from picker");
+                test.pass("Time '" + hourToSelect + "' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '7' not found in time picker");
+                test.fail("Next hour time value not found in time picker");
                 Assert.fail("Time picker failed");
+            } catch (Exception e) {
+                test.fail("Unexpected error while selecting time: " + e.getMessage());
+                e.printStackTrace();
             }
+
+//            try {
+//                WebElement element = driver.findElement(
+//                        MobileBy.AndroidUIAutomator(
+//                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"7\"))"
+//                        )
+//                );
+//                element.click();
+//                test.pass("Time '7' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '7' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
 
 //            WebElement amPm = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"p.m.\")"));
 //            amPm.click();
@@ -182,7 +214,7 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             Thread.sleep(90000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(541, 1798);
-            var end = new Point (528, 684);
+            var end = new Point(528, 684);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -193,10 +225,10 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             driver.perform(Arrays.asList(swipe));
 
 
-              finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(532, 1491);
-             end = new Point (541, 401);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(532, 1491);
+            end = new Point(541, 401);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -206,10 +238,10 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             driver.perform(Arrays.asList(swipe));
 
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(491, 1593);
-             end = new Point (491, 1118);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(491, 1593);
+            end = new Point(491, 1118);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -223,10 +255,10 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             beverage.click();
             test.pass("Clicked on Beverage");
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(573, 1716);
-             end = new Point (614, 602);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(573, 1716);
+            end = new Point(614, 602);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -265,10 +297,10 @@ public class LTOJalapenoRoastBeefCheddarMeal {
 
             Thread.sleep(50000);
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(381, 1749);
-             end = new Point(426, 962);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(381, 1749);
+            end = new Point(426, 962);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -342,6 +374,18 @@ public class LTOJalapenoRoastBeefCheddarMeal {
             test.pass("Clicked Done Button");
 
             Thread.sleep(20000);
+
+            try {
+                WebElement trackOrderBtn = driver.findElement(
+                        AppiumBy.androidUIAutomator("new UiSelector().text(\"TRACK ORDER\")")
+                );
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is displayed");
+                test.pass("Verified: Track Order button present in success popup.");
+            } catch (NoSuchElementException e) {
+                test.fail("Track Order button not found.");
+                Assert.fail("Order confirmation popup failed.");
+            }
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

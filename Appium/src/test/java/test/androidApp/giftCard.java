@@ -23,9 +23,10 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class arbyGooglePayPayment {
+public class giftCard {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -48,8 +49,8 @@ public class arbyGooglePayPayment {
     }
 
     @Test
-    public void googlePayPayment() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyGooglePayPayment.html");
+    public void giftCardPayment() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyGiftCardPayment.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -243,25 +244,47 @@ public class arbyGooglePayPayment {
             viewCart.click();
             test.pass("Clicked on viewCart");
 
-//            Thread.sleep(50000);
-//            WebElement proceed2B = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
-//            proceed2B.click();
-//            test.pass("Clicked Proceed again");
-
-//            Thread.sleep(9000);
-//            WebElement el25 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_home"));
-//            el25.click();
-//
-//            Thread.sleep(20000);
-//            WebElement el26 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_cart"));
-//            el26.click();
-
             Thread.sleep(90000);
 
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(381, 1749);
-            end = new Point(426, 962);
-            swipe = new Sequence(finger, 1);
+            test = extent.createTest("Payment method").assignCategory("Regression");
+
+            Thread.sleep(20000);
+
+            WebElement giftCardRadioBtn = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/swGiftCard"));
+            giftCardRadioBtn.click();
+            test.pass("Clicked on gift Card Radio Button");
+
+            Thread.sleep(20000);
+            WebElement giftCardNum = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/etGiftCardNumber"));
+            giftCardNum.click();
+            giftCardNum.sendKeys("7777486418577094");
+            test.pass("Enter gift Card Number");
+
+            Thread.sleep(5000);
+            WebElement pin = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/etGiftCardPin"));
+            pin.click();
+            pin.sendKeys("9718");
+            test.pass("Enter Pin Number");
+
+
+            Thread.sleep(5000);
+            driver.executeScript("mobile: pressKey", Map.ofEntries(Map.entry("keycode", 4)));
+
+            Thread.sleep(9000);
+            WebElement applyGiftCardBtn = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
+            applyGiftCardBtn.click();
+            test.pass("Clicked on apply Gift Card Button");
+
+            Thread.sleep(50000);
+            WebElement confirmBtn = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
+            confirmBtn.click();
+            test.pass("Clicked on confirm Button");
+
+            Thread.sleep(5000);
+             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+             start = new Point(446, 1773);
+             end = new Point (471, 786);
+             swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -270,23 +293,10 @@ public class arbyGooglePayPayment {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-
-            Thread.sleep(7000);
-            WebElement payment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
-            payment.click();
-            test.pass("Clicked on payment");
-
-            Thread.sleep(3000);
-            WebElement checkout = driver.findElement(AppiumBy.id("com.google.android.gms:id/pay_button_view"));
-            checkout.click();
-            test.pass("Clicked on checkout");
-
-            test = extent.createTest("Payment method").assignCategory("Regression");
-
-            Thread.sleep(50000);
-            WebElement googlePay = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Pay now\")"));
-            googlePay.click();
-            test.pass("Clicked on googlePay");
+            Thread.sleep(9000);
+            WebElement checkoutBtn = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btCheckOut"));
+            checkoutBtn.click();
+            test.pass("Clicked on Checkout Button");
 
             Thread.sleep(70000);
 
@@ -300,8 +310,10 @@ public class arbyGooglePayPayment {
                 test.fail("Track Order button not found.");
                 Assert.fail("Order confirmation popup failed.");
             }
+
 //            WebElement successPopup = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/orderSuccessMessage"));
 //            Assert.assertTrue(successPopup.isDisplayed());
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

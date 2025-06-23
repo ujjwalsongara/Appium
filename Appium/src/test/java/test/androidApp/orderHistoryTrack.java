@@ -28,12 +28,7 @@ public class orderHistoryTrack {
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void trackOrder() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbytrackOrder.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static DesiredCapabilities getAndroidDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -46,6 +41,16 @@ public class orderHistoryTrack {
         capabilities.setCapability("nativeWebScreenshot", true);
         capabilities.setCapability("newCommandTimeout", 3600);
         capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
+
+    @Test
+    public void trackOrder() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbytrackOrder.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        DesiredCapabilities capabilities = getAndroidDriver();
 
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
@@ -127,7 +132,6 @@ public class orderHistoryTrack {
             Assert.fail(e.getMessage());
         }
     }
-
 
     @AfterClass
     public void tearDown() {

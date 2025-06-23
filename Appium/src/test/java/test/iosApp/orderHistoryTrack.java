@@ -28,12 +28,7 @@ public class orderHistoryTrack {
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void trackOrder() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbytrackOrderIOS.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static IOSDriver getIosDriver() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -47,6 +42,16 @@ public class orderHistoryTrack {
 
         URL serverURL = new URL("http://127.0.0.1:4723/");
         IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
+    @Test
+    public void trackOrder() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbytrackOrderIOS.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        IOSDriver driver = getIosDriver();
 
         test = extent.createTest("Signup Flow Test").assignCategory("Regression");
 

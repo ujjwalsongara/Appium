@@ -25,7 +25,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class arbyGooglePayPayment {
+public class noInternetGooglePayTransaction {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -38,6 +38,7 @@ public class arbyGooglePayPayment {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
         capabilities.setCapability(MobileCapabilityType.APP, "//Users/apple/Downloads/app-dev_Intl-debug.apk");
+//        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arby'sBuzzparadeSigned_noUnattendedCartPopup_webviewdebuggable.apk");
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("ensureWebviewsHavePages", true);
@@ -48,8 +49,8 @@ public class arbyGooglePayPayment {
     }
 
     @Test
-    public void googlePayPayment() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyGooglePayPayment.html");
+    public void noInternetGooglePayPayment() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyNoInternetGooglePayPayment.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -70,7 +71,7 @@ public class arbyGooglePayPayment {
             skipButton.click();
             test.pass("Clicked on Skip");
 
-            Thread.sleep(7000);
+            Thread.sleep(5000);
             WebElement allowButton = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvPositive"));
             allowButton.click();
             test.pass("Clicked on Allow button");
@@ -130,9 +131,11 @@ public class arbyGooglePayPayment {
             test.pass("Opened time picker");
 
             try {
+
                 int currentHour = LocalTime.now().getHour();
                 int nextHour = (currentHour + 1) % 12;
                 if (nextHour == 0) nextHour = 12;
+
                 String hourToSelect = String.valueOf(nextHour);
 
                 WebElement element = driver.findElement(
@@ -151,6 +154,24 @@ public class arbyGooglePayPayment {
                 test.fail("Unexpected error while selecting time: " + e.getMessage());
                 e.printStackTrace();
             }
+
+//            try {
+//                WebElement element = driver.findElement(
+//                        MobileBy.AndroidUIAutomator(
+//                                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"12\"))"
+//                        )
+//                );
+//                element.click();
+//                test.pass("Time '12' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '12' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
+
+//            WebElement amPm = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"p.m.\")"));
+//            amPm.click();
+//            test.pass("Selected PM");
 
             Thread.sleep(7000);
             WebElement okBtn = driver.findElement(AppiumBy.id("android:id/button1"));
@@ -243,19 +264,6 @@ public class arbyGooglePayPayment {
             viewCart.click();
             test.pass("Clicked on viewCart");
 
-//            Thread.sleep(50000);
-//            WebElement proceed2B = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btn_proceed"));
-//            proceed2B.click();
-//            test.pass("Clicked Proceed again");
-
-//            Thread.sleep(9000);
-//            WebElement el25 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_home"));
-//            el25.click();
-//
-//            Thread.sleep(20000);
-//            WebElement el26 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/action_cart"));
-//            el26.click();
-
             Thread.sleep(90000);
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
@@ -272,36 +280,37 @@ public class arbyGooglePayPayment {
 
 
             Thread.sleep(7000);
-            WebElement payment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(0)"));
+            WebElement payment = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"com.buzzparade.arbysintl:id/rbPaymentType\").instance(1)"));
             payment.click();
             test.pass("Clicked on payment");
 
+            test = extent.createTest("Payment method").assignCategory("Regression");
+
+            Runtime.getRuntime().exec("adb shell svc wifi disable");
+            Runtime.getRuntime().exec("adb shell svc data disable");
             Thread.sleep(3000);
+
+
+            Thread.sleep(5000);
             WebElement checkout = driver.findElement(AppiumBy.id("com.google.android.gms:id/pay_button_view"));
             checkout.click();
             test.pass("Clicked on checkout");
 
-            test = extent.createTest("Payment method").assignCategory("Regression");
-
-            Thread.sleep(50000);
-            WebElement googlePay = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Pay now\")"));
-            googlePay.click();
-            test.pass("Clicked on googlePay");
-
-            Thread.sleep(70000);
+            Thread.sleep(5000);
 
             try {
-                WebElement trackOrderBtn = driver.findElement(
-                        AppiumBy.androidUIAutomator("new UiSelector().text(\"TRACK ORDER\")")
+                WebElement errorAlert = driver.findElement(
+                        AppiumBy.androidUIAutomator("new UiSelector().textContains(\"You must be connected to the internet to proceed\")")
                 );
-                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is displayed");
-                test.pass("Verified: Track Order button present in success popup.");
-            } catch (NoSuchElementException e) {
-                test.fail("Track Order button not found.");
-                Assert.fail("Order confirmation popup failed.");
+                Assert.assertTrue(errorAlert.isDisplayed(), "No-internet alert displayed as expected.");
+                test.pass("Error message for no internet connection is displayed correctly.");
+
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+                test.fail("Expected no-internet alert was not displayed.");
+                Assert.fail("No-internet connection alert not shown during Google Pay checkout.");
             }
-//            WebElement successPopup = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/orderSuccessMessage"));
-//            Assert.assertTrue(successPopup.isDisplayed());
+
+            Thread.sleep(70000);
             test.pass("Final checkout completed");
 
         } catch (Exception e) {
@@ -319,4 +328,5 @@ public class arbyGooglePayPayment {
             extent.flush();
         }
     }
+
 }

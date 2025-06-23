@@ -30,13 +30,7 @@ public class everydayValue2for$12 {
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void everyday2for$12() throws MalformedURLException, InterruptedException {
-
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12IOS.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static IOSDriver getIosDriver() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -50,6 +44,17 @@ public class everydayValue2for$12 {
 
         URL serverURL = new URL("http://127.0.0.1:4723/");
         IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
+    @Test
+    public void everyday2for$12() throws MalformedURLException, InterruptedException {
+
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12IOS.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        IOSDriver driver = getIosDriver();
 
         test = extent.createTest("Signup Flow Test").assignCategory("Regression");
 
@@ -151,7 +156,6 @@ public class everydayValue2for$12 {
             test.pass("Clicked on confirmTime");
 
 
-
             test = extent.createTest("Menu Flow Test").assignCategory("Regression");
 
 //            Thread.sleep(7000);
@@ -167,7 +171,7 @@ public class everydayValue2for$12 {
             Thread.sleep(7000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(245, 697);
-            var end = new Point (240, 380);
+            var end = new Point(240, 380);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -184,10 +188,10 @@ public class everydayValue2for$12 {
             test.pass("Clicked on view item");
 
             Thread.sleep(5000);
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(192, 714);
-             end = new Point (199, 337);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(192, 714);
+            end = new Point(199, 337);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -197,10 +201,10 @@ public class everydayValue2for$12 {
             driver.perform(Arrays.asList(swipe));
 
 
-             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(197, 732);
-             end = new Point (184, 289);
-             swipe = new Sequence(finger, 1);
+            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            start = new Point(197, 732);
+            end = new Point(184, 289);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -216,9 +220,9 @@ public class everydayValue2for$12 {
 
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-             start = new Point(216, 681);
-             end = new Point (219, 351);
-             swipe = new Sequence(finger, 1);
+            start = new Point(216, 681);
+            end = new Point(219, 351);
+            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));

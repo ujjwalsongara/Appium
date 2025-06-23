@@ -7,8 +7,12 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import lombok.var;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +20,8 @@ import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
+import java.util.Arrays;
 
 public class rewardCategoriesIOS {
 
@@ -23,12 +29,7 @@ public class rewardCategoriesIOS {
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void payment() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportIOSArbyRewardCategoriesIOS.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static IOSDriver getIosDriver() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 16 Plus");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
@@ -43,6 +44,16 @@ public class rewardCategoriesIOS {
 
         URL serverURL = new URL("http://127.0.0.1:4723/");
         IOSDriver driver = new IOSDriver(serverURL, capabilities);
+        return driver;
+    }
+
+    @Test
+    public void payment() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportIOSArbyRewardCategoriesIOS.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        IOSDriver driver = getIosDriver();
 
         test = extent.createTest("Signup Flow Test").assignCategory("Regression");
 
@@ -102,8 +113,21 @@ public class rewardCategoriesIOS {
             Rewards.click();
             test.pass("Clicked on Rewards");
 
+            Thread.sleep(5000);
+            final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+            var start = new Point(210, 751);
+            var end = new Point(216, 402);
+            var swipe = new Sequence(finger, 1);
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+            driver.perform(Arrays.asList(swipe));
+
             Thread.sleep(7000);
-            WebElement signatureMeats = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]"));
+            WebElement signatureMeats = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeCollectionView/XCUIElementTypeCell[4]"));
             signatureMeats.click();
             test.pass("Clicked on signatureMeats");
 
@@ -206,7 +230,6 @@ public class rewardCategoriesIOS {
             Assert.fail(e.getMessage());
         }
     }
-
 
     @AfterClass
     public void tearDown() {

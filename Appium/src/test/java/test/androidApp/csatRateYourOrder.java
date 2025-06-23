@@ -25,17 +25,11 @@ import java.util.Set;
 
 public class csatRateYourOrder {
 
-
     AndroidDriver driver;
     ExtentReports extent;
     ExtentTest test;
 
-    @Test
-    public void RateYourOrder() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbycsatRateYourOrder.html");
-        extent = new ExtentReports();
-        extent.attachReporter(spark);
-
+    private static DesiredCapabilities getAndroidDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 7");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
@@ -48,7 +42,16 @@ public class csatRateYourOrder {
         capabilities.setCapability("nativeWebScreenshot", true);
         capabilities.setCapability("newCommandTimeout", 3600);
         capabilities.setCapability("connectHardwareKeyboard", true);
+        return capabilities;
+    }
 
+    @Test
+    public void RateYourOrder() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbycsatRateYourOrder.html");
+        extent = new ExtentReports();
+        extent.attachReporter(spark);
+
+        DesiredCapabilities capabilities = getAndroidDriver();
 
         URL url = URI.create("http://127.0.0.1:4723/").toURL();
         driver = new AndroidDriver(url, capabilities);
@@ -113,7 +116,6 @@ public class csatRateYourOrder {
 
             test = extent.createTest("RateYourOrder").assignCategory("Regression");
 
-
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             var start = new Point(414, 1843);
             var end = new Point(410, 1065);
@@ -135,7 +137,7 @@ public class csatRateYourOrder {
             driver.context("NATIVE_APP");
             System.out.println(driver.getPageSource());
 
-            Thread.sleep(3000);
+            Thread.sleep(50000);
             WebElement el16 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/tvRateOrder"));
             el16.click();
 
@@ -151,7 +153,7 @@ public class csatRateYourOrder {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            Thread.sleep(5000);
+            Thread.sleep(50000);
             WebElement el17 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"EXTREMELY SATISFIED\")"));
             el17.click();
 
@@ -215,7 +217,6 @@ public class csatRateYourOrder {
         }
     }
 
-
     @AfterClass
     public void tearDown() {
         if (driver != null) {
@@ -225,6 +226,4 @@ public class csatRateYourOrder {
             extent.flush();
         }
     }
-
-
 }

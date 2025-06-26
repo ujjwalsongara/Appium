@@ -311,6 +311,11 @@ public class noInternetGooglePayTransaction {
             }
 
             Thread.sleep(70000);
+
+            Runtime.getRuntime().exec("adb shell svc wifi enable");
+            Runtime.getRuntime().exec("adb shell svc data enable");
+            Thread.sleep(3000);
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

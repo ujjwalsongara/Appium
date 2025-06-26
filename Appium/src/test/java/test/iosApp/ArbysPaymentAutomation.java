@@ -39,7 +39,7 @@ public class ArbysPaymentAutomation {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys.app");
         capabilities.setCapability("autoAcceptAlerts", true);
         capabilities.setCapability("autoGrantPermissions", true); // Grant all permissions
 //        capabilities.setCapability("ios"," /Users/apple/Downloads/Arbys.app");
@@ -340,6 +340,12 @@ public class ArbysPaymentAutomation {
                 Assert.fail("Popup did not appear as expected");
             }
 
+            WebElement orderIdElement = driver.findElement(
+                    MobileBy.iOSNsPredicateString("value MATCHES '\\\\d{6}'")
+            );
+            String orderId = orderIdElement.getText();
+            System.out.println("Order ID: " + orderId);
+            test.pass("Order ID captured: " + orderId);
 
             test.pass("Final checkout completed");
 

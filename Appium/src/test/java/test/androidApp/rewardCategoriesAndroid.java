@@ -16,7 +16,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -26,8 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class rewardCategoriesAndroid {
 
+public class rewardCategoriesAndroid {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -133,21 +132,53 @@ public class rewardCategoriesAndroid {
             test.pass("Clicked on signature Meats");
 
             Thread.sleep(7000);
-            List<WebElement> convertPointList = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
 
-            if (!convertPointList.isEmpty()) {
-                convertPointList.get(0).click();
-                test.pass("Clicked on convertPoint Redeem button");
-            } else {
-                List<WebElement> redeemBtnList = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
+            List<WebElement> redeemButtons = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
 
-                if (!redeemBtnList.isEmpty()) {
-                    redeemBtnList.get(0).click();
-                    test.pass("Clicked on fallback redeemBtn");
+            if (!redeemButtons.isEmpty()) {
+                WebElement button = redeemButtons.get(0);
+                String buttonText = button.getText();
+
+                if (buttonText.equalsIgnoreCase("Convert Points")) {
+                    button.click();
+                    test.pass("Clicked on 'Convert Points' button");
+
+                    Thread.sleep(3000);
+
+                    WebElement redeemBtn = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
+                    if (redeemBtn.getText().equalsIgnoreCase("Redeem")) {
+                        redeemBtn.click();
+                        test.pass("Clicked on 'Redeem' button after conversion");
+                    } else {
+                        test.fail("Redeem button not found after Convert Points click");
+                    }
+
+                } else if (buttonText.equalsIgnoreCase("Redeem")) {
+                    button.click();
+                    test.pass("Clicked on 'Redeem' button directly");
                 } else {
-                    test.fail("Neither el8 nor redeemBtn found.");
+                    test.fail("Button found but with unexpected label: " + buttonText);
                 }
+
+            } else {
+                test.fail("No button with id 'btRedeem' found.");
             }
+
+//            List<WebElement> convertPointList = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
+//
+//            if (!convertPointList.isEmpty()) {
+//                convertPointList.get(0).click();
+//                test.pass("Clicked on convertPoint Redeem button");
+//            } else {
+//                List<WebElement> redeemBtnList = driver.findElements(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
+//
+//                if (!redeemBtnList.isEmpty()) {
+//                    redeemBtnList.get(0).click();
+//                    test.pass("Clicked on fallback redeemBtn");
+//                } else {
+//                    test.fail("Neither el8 nor redeemBtn found.");
+//                }
+//            }
 
 //            WebElement el8 = driver.findElement(AppiumBy.id("com.buzzparade.arbysintl:id/btRedeem"));
 //            el8.click();
@@ -305,6 +336,14 @@ public class rewardCategoriesAndroid {
                 test.fail("Track Order button not found.");
                 Assert.fail("Order confirmation popup failed.");
             }
+
+            WebElement orderIdElement = driver.findElement(
+                    AppiumBy.androidUIAutomator("new UiSelector().textContains(\"ORDER ID\")")
+            );
+
+            String fullText = orderIdElement.getText();
+            System.out.println("Raw ORDER ID Text: " + fullText);
+            test.pass("Order ID captured: " + fullText);
 
             test.pass("Final checkout completed");
 

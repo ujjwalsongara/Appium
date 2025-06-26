@@ -36,7 +36,7 @@ public class giftCardPayiOS {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys 2.app");
         capabilities.setCapability("autoAcceptAlerts", true);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("noReset", false);
@@ -165,61 +165,61 @@ public class giftCardPayiOS {
 //            test.pass("Clicked on menu");
 
             Thread.sleep(7000);
-            WebElement meals = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeImage"));
-            meals.click();
-            test.pass("Clicked on Meals");
+            WebElement crispyJuicyChicken = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeImage"));
+            crispyJuicyChicken.click();
+            test.pass("Clicked on crispyJuicyChicken");
 
             Thread.sleep(8000);
-            WebElement viewItem = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
+            WebElement viewItem = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
             viewItem.click();
             test.pass("Clicked on view item");
 
-
-            var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(210, 687);
-            var end = new Point(213, 219);
-            var swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(8000);
-            WebElement side = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][2]"));
-            side.click();
-            test.pass("Clicked on Side item");
-
-            Thread.sleep(8000);
-            WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
-            el14.click();
-            test.pass("Clicked on item");
-
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(199, 697);
-            end = new Point(202, 229);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(8000);
-            WebElement Beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
-            Beverage.click();
-            test.pass("Clicked on Beverage");
-
-            Thread.sleep(8000);
-            WebElement Shake = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
-            Shake.click();
-            test.pass("Clicked on Shake");
-
+//
+//            var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//            var start = new Point(210, 687);
+//            var end = new Point(213, 219);
+//            var swipe = new Sequence(finger, 1);
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//            driver.perform(Arrays.asList(swipe));
+//
+//            Thread.sleep(8000);
+//            WebElement side = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][2]"));
+//            side.click();
+//            test.pass("Clicked on Side item");
+//
+//            Thread.sleep(8000);
+//            WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
+//            el14.click();
+//            test.pass("Clicked on item");
+//
+//
+//            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//            start = new Point(199, 697);
+//            end = new Point(202, 229);
+//            swipe = new Sequence(finger, 1);
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//            driver.perform(Arrays.asList(swipe));
+//
+//            Thread.sleep(8000);
+//            WebElement Beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
+//            Beverage.click();
+//            test.pass("Clicked on Beverage");
+//
+//            Thread.sleep(8000);
+//            WebElement Shake = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
+//            Shake.click();
+//            test.pass("Clicked on Shake");
+//
 //            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
 //            start = new Point(216, 681);
 //            end = new Point (219, 351);
@@ -279,7 +279,45 @@ public class giftCardPayiOS {
 //            test.pass("Clicked on checkOutToApplePay");
 
             Thread.sleep(7000);
-            test = extent.createTest("Payment method").assignCategory("Regression");
+            test = extent.createTest("Gift Card method").assignCategory("Regression");
+
+            Thread.sleep(10000);
+            WebElement giftCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"switch icon\"`]"));
+            giftCard.click();
+            test.pass("Clicked on gift Card Icon");
+
+
+            Thread.sleep(7000);
+            WebElement giftCardNum = driver.findElement(AppiumBy.className("XCUIElementTypeTextField"));
+            giftCardNum.click();
+            giftCardNum.clear();
+            giftCardNum.sendKeys("7777486418588658");
+            test.pass("Enter gift Card Num");
+
+            Thread.sleep(5000);
+            WebElement pin = driver.findElement(AppiumBy.className("XCUIElementTypeSecureTextField"));
+            pin.click();
+            pin.sendKeys("0995");
+            test.pass("Enter pin");
+
+            WebElement keyboardDone = driver.findElement(AppiumBy.accessibilityId("Done"));
+            keyboardDone.click();
+
+
+            Thread.sleep(7000);
+            WebElement applyGiftCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"APPLY GIFT CARD\"`]"));
+            applyGiftCard.click();
+            test.pass("Clicked on apply Gift Card");
+
+            Thread.sleep(9000);
+            WebElement confirmBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CONFIRM\"`]"));
+            confirmBtn.click();
+            test.pass("Clicked on Confirm");
+
+            Thread.sleep(10000);
+            WebElement checkoutBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CHECKOUT\"`]"));
+            checkoutBtn.click();
+            test.pass("Clicked on Checkout");
 
 //            JavascriptExecutor js = (JavascriptExecutor) driver;
 //            Map<String, Object> args = new HashMap<>();

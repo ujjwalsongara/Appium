@@ -312,6 +312,13 @@ public class ReOrder {
                 Assert.fail("Popup did not appear as expected");
             }
 
+            WebElement orderIdElement = driver.findElement(
+                    MobileBy.iOSNsPredicateString("value MATCHES '\\\\d{6}'")
+            );
+            String orderId = orderIdElement.getText();
+            System.out.println("Order ID: " + orderId);
+            test.pass("Order ID captured: " + orderId);
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

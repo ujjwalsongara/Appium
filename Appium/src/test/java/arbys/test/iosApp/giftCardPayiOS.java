@@ -1,10 +1,9 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -15,8 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
@@ -26,7 +23,8 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class noInternetApplePayTransaction {
+
+public class giftCardPayiOS {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -38,9 +36,9 @@ public class noInternetApplePayTransaction {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
-//        capabilities.setCapability("autoAcceptAlerts", true);
-//        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys 2.app");
+        capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("newCommandTimeout", 7000);
         capabilities.setCapability("enableApplePay", true);
@@ -51,9 +49,9 @@ public class noInternetApplePayTransaction {
     }
 
     @Test
-    public void noInternetApplePayPayment() throws MalformedURLException, InterruptedException {
+    public void giftCardPayment() throws MalformedURLException, InterruptedException {
 
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbynoInternetApplePayPayment.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbygiftCardPaymentiOS.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -167,61 +165,61 @@ public class noInternetApplePayTransaction {
 //            test.pass("Clicked on menu");
 
             Thread.sleep(7000);
-            WebElement meals = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeImage"));
-            meals.click();
-            test.pass("Clicked on Meals");
+            WebElement crispyJuicyChicken = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeImage"));
+            crispyJuicyChicken.click();
+            test.pass("Clicked on crispyJuicyChicken");
 
             Thread.sleep(8000);
-            WebElement viewItem = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
+            WebElement viewItem = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
             viewItem.click();
             test.pass("Clicked on view item");
 
-
-            var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(210, 687);
-            var end = new Point(213, 219);
-            var swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(8000);
-            WebElement side = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][2]"));
-            side.click();
-            test.pass("Clicked on Side item");
-
-            Thread.sleep(8000);
-            WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
-            el14.click();
-            test.pass("Clicked on item");
-
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(199, 697);
-            end = new Point(202, 229);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(8000);
-            WebElement Beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
-            Beverage.click();
-            test.pass("Clicked on Beverage");
-
-            Thread.sleep(8000);
-            WebElement Shake = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
-            Shake.click();
-            test.pass("Clicked on Shake");
-
+//
+//            var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//            var start = new Point(210, 687);
+//            var end = new Point(213, 219);
+//            var swipe = new Sequence(finger, 1);
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//            driver.perform(Arrays.asList(swipe));
+//
+//            Thread.sleep(8000);
+//            WebElement side = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][2]"));
+//            side.click();
+//            test.pass("Clicked on Side item");
+//
+//            Thread.sleep(8000);
+//            WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
+//            el14.click();
+//            test.pass("Clicked on item");
+//
+//
+//            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//            start = new Point(199, 697);
+//            end = new Point(202, 229);
+//            swipe = new Sequence(finger, 1);
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//            driver.perform(Arrays.asList(swipe));
+//
+//            Thread.sleep(8000);
+//            WebElement Beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
+//            Beverage.click();
+//            test.pass("Clicked on Beverage");
+//
+//            Thread.sleep(8000);
+//            WebElement Shake = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[4]/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeCollectionView/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther"));
+//            Shake.click();
+//            test.pass("Clicked on Shake");
+//
 //            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
 //            start = new Point(216, 681);
 //            end = new Point (219, 351);
@@ -246,25 +244,23 @@ public class noInternetApplePayTransaction {
 
             Thread.sleep(50000);
 
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(227, 682);
-            end = new Point(232, 412);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(5000);
-            WebElement paymentMode = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`][6]"));
-            paymentMode.click();
-            test.pass("Clicked on paymentMode");
-
-            test = extent.createTest("Payment method No Internet error").assignCategory("Regression");
-
+//            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//            start = new Point(227, 682);
+//            end = new Point(232, 412);
+//            swipe = new Sequence(finger, 1);
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//            driver.perform(Arrays.asList(swipe));
+//
+//            Thread.sleep(5000);
+//            WebElement paymentMode = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`][6]"));
+//            paymentMode.click();
+//            test.pass("Clicked on paymentMode");
+//
 //            Set<String> contextNames = driver.getContextHandles();
 //            for (String contextName : contextNames) {
 //                System.out.println(contextName);
@@ -273,27 +269,71 @@ public class noInternetApplePayTransaction {
 //
 //            driver.context("NATIVE_APP");
 //            System.out.println(driver.getPageSource());
+//
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//            WebElement checkOutToApplePay = wait.until(
+//                    ExpectedConditions.presenceOfElementLocated(MobileBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Check out with Apple Pay\"`]"))
+//            );
+//            Thread.sleep(9000);
+//            checkOutToApplePay.click();
+//            test.pass("Clicked on checkOutToApplePay");
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-            WebElement checkOutToApplePay = wait.until(
-                    ExpectedConditions.presenceOfElementLocated(MobileBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Check out with Apple Pay\"`]"))
-            );
+            Thread.sleep(7000);
+            test = extent.createTest("Gift Card method").assignCategory("Regression");
+
+            Thread.sleep(10000);
+            WebElement giftCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"switch icon\"`]"));
+            giftCard.click();
+            test.pass("Clicked on gift Card Icon");
+
+
+            Thread.sleep(7000);
+            WebElement giftCardNum = driver.findElement(AppiumBy.className("XCUIElementTypeTextField"));
+            giftCardNum.click();
+            giftCardNum.clear();
+            giftCardNum.sendKeys("7777486418588658");
+            test.pass("Enter gift Card Num");
+
+            Thread.sleep(5000);
+            WebElement pin = driver.findElement(AppiumBy.className("XCUIElementTypeSecureTextField"));
+            pin.click();
+            pin.sendKeys("0995");
+            test.pass("Enter pin");
+
+            WebElement keyboardDone = driver.findElement(AppiumBy.accessibilityId("Done"));
+            keyboardDone.click();
+
+
+            Thread.sleep(7000);
+            WebElement applyGiftCard = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"APPLY GIFT CARD\"`]"));
+            applyGiftCard.click();
+            test.pass("Clicked on apply Gift Card");
+
             Thread.sleep(9000);
-            checkOutToApplePay.click();
-            test.pass("Clicked on checkOutToApplePay");
+            WebElement confirmBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CONFIRM\"`]"));
+            confirmBtn.click();
+            test.pass("Clicked on Confirm");
 
-            Thread.sleep(3000);
+            Thread.sleep(10000);
+            WebElement checkoutBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CHECKOUT\"`]"));
+            checkoutBtn.click();
+            test.pass("Clicked on Checkout");
 
-            try {
-                WebElement errorAlert = driver.findElement(AppiumBy.iOSNsPredicateString("label CONTAINS 'No Internet Connection Detected'"));
-                Assert.assertTrue(errorAlert.isDisplayed(), "Apple Pay error displayed as expected.");
-                test.pass("Error message for no internet connection is displayed correctly.");
+//            JavascriptExecutor js = (JavascriptExecutor) driver;
+//            Map<String, Object> args = new HashMap<>();
+//            args.put("action", "tap");
+//            args.put("element", payElement.getId()); // if you somehow get the element
+//            js.executeScript("mobile: performEditorAction", args);
+//
 
-            } catch (NoSuchElementException e) {
-                test.fail("Expected no-internet alert was not displayed.");
-                Assert.fail("No-internet connection alert not shown during Apple Pay checkout.");
-            }
-
+//            WebDriverWait waiti = new WebDriverWait(driver, Duration.ofSeconds(10));
+//            WebElement payBtn = waiti.until(
+//                    ExpectedConditions.elementToBeClickable(
+//                            By.id("Pay with Passcode")
+//                    )
+//            );
+//            payBtn.click();
+//            test.pass("Clicked on payWithPassCode");
             Thread.sleep(10000);
             test.pass("Final checkout completed");
 
@@ -312,6 +352,4 @@ public class noInternetApplePayTransaction {
             extent.flush();
         }
     }
-
-
 }

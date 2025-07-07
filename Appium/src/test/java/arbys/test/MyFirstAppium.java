@@ -1,4 +1,4 @@
-package test;
+package arbys.test;
 
 import java.net.MalformedURLException;
 

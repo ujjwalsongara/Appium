@@ -1,4 +1,4 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -40,7 +40,7 @@ public class arbyApplePayPayment {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys.app");
         capabilities.setCapability("autoAcceptAlerts", true);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("noReset", false);
@@ -265,14 +265,14 @@ public class arbyApplePayPayment {
             paymentMode.click();
             test.pass("Clicked on paymentMode");
 
-            Set<String> contextNames = driver.getContextHandles();
-            for (String contextName : contextNames) {
-                System.out.println(contextName);
-            }
-            driver.context((String) contextNames.toArray()[0]);
-
-            driver.context("NATIVE_APP");
-            System.out.println(driver.getPageSource());
+//            Set<String> contextNames = driver.getContextHandles();
+//            for (String contextName : contextNames) {
+//                System.out.println(contextName);
+//            }
+//            driver.context((String) contextNames.toArray()[0]);
+//
+//            driver.context("NATIVE_APP");
+//            System.out.println(driver.getPageSource());
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             WebElement checkOutToApplePay = wait.until(
@@ -301,6 +301,25 @@ public class arbyApplePayPayment {
             payBtn.click();
             test.pass("Clicked on payWithPassCode");
             Thread.sleep(10000);
+
+            try {
+                WebElement successMsg = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'ORDER SUCCESSFULLY PLACED'")
+                );
+                WebElement trackOrderBtn = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'TRACK ORDER'")
+                );
+
+                Assert.assertTrue(successMsg.isDisplayed(), "Success message is visible");
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is visible");
+
+                test.pass("Order confirmation popup verified successfully");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Order confirmation popup elements not found");
+                Assert.fail("Popup did not appear as expected");
+            }
+
             test.pass("Final checkout completed");
 
         } catch (Exception e) {

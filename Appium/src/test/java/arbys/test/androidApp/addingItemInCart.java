@@ -1,4 +1,4 @@
-package test.androidApp;
+package arbys.test.androidApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;

@@ -1,4 +1,4 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -8,6 +8,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.var;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -132,8 +133,9 @@ public class csatForIos {
             test = extent.createTest("Rate your order Flow Test").assignCategory("Regression");
 
             Thread.sleep(6000);
-            WebElement el9 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Rate this order\"`][1]"));
-            el9.click();
+            WebElement rateYourOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Rate this order\"`][1]"));
+            rateYourOrder.click();
+            test.pass("Clicked on Rate Your Order");
 
             Thread.sleep(3000);
             Set<String> contextNames = driver.getContextHandles();
@@ -147,8 +149,9 @@ public class csatForIos {
 
 
             Thread.sleep(10000);
-            WebElement el10 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"10\"`][2]"));
-            el10.click();
+            WebElement likely = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"10\"`][2]"));
+            likely.click();
+            test.pass("Clicked on likely");
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(49, 722);
@@ -162,8 +165,11 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            WebElement el12 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[34]"));
-            el12.click();
+            Thread.sleep(5000);
+            WebElement overall = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[34]"));
+            overall.click();
+            test.pass("Clicked on overall");
+
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(104, 726);
@@ -177,8 +183,10 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            WebElement el13 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[47]"));
-            el13.click();
+            Thread.sleep(5000);
+            WebElement satisfied = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[47]"));
+            satisfied.click();
+            test.pass("Clicked on satisfied");
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(313, 735);
@@ -192,8 +200,9 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            WebElement el14 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeSwitch[`name == \"Beverages\"`]"));
-            el14.click();
+            WebElement product = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeSwitch[`name == \"Beverages\"`]"));
+            product.click();
+            test.pass("Clicked on product");
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(265, 704);
@@ -207,6 +216,9 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
+            Thread.sleep(5000);
+            WebElement serviceReceived = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"EXTREMELY SATISFIED\"`][3]"));
+            serviceReceived.click();
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(306, 756);
@@ -220,6 +232,8 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
+            WebElement cleanliness = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"EXTREMELY SATISFIED\"`][4]"));
+            cleanliness.click();
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
             start = new Point(270, 719);
@@ -233,14 +247,44 @@ public class csatForIos {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-            WebElement el15 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"\"`][2]"));
-            el15.click();
-            WebElement el16 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[97]"));
-            el16.click();
+            Thread.sleep(5000);
+            WebElement feedbackText = driver.findElement(AppiumBy.className("XCUIElementTypeTextView"));
+            feedbackText.click();
+            feedbackText.sendKeys("Hello, Thanks");
+            WebElement keyboardDoneBtn = driver.findElement(AppiumBy.accessibilityId("Done"));
+            keyboardDoneBtn.click();
 
+            Thread.sleep(5000);
+            WebElement no = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"\"`][2]"));
+            no.click();
+
+            Thread.sleep(5000);
+            WebElement submitBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"SUBMIT\"`]"));
+            submitBtn.click();
+
+//            WebElement el15 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"\"`][2]"));
+//            el15.click();
+//
+//            WebElement el16 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeOther[`name == \"main\"`]/XCUIElementTypeOther[97]"));
+//            el16.click();
+//
 
             Thread.sleep(50000);
 
+            try {
+                WebElement thankYouElement = driver.findElement(
+                        AppiumBy.iOSNsPredicateString("label == 'Thank You!' OR name == 'Thank You!'")
+                );
+
+                Assert.assertTrue(thankYouElement.isDisplayed(), "'Thank You!' screen is displayed");
+                test.pass("Feedback confirmation screen is displayed successfully on iOS");
+
+            } catch (NoSuchElementException e) {
+                test.fail("'Thank You!' text not found. Feedback screen verification failed on iOS.");
+                Assert.fail("Feedback screen not found on iOS.");
+            }
+
+            test.pass("Final checkout completed");
 
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());

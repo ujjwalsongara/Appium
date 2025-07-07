@@ -1,9 +1,10 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -24,7 +25,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Set;
 
-public class LTOJalapenoRoastMeal {
+public class everydayValue2for$12 {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -48,9 +49,9 @@ public class LTOJalapenoRoastMeal {
     }
 
     @Test
-    public void LTOJalapenoRoastBeefCheddarMeal() throws MalformedURLException, InterruptedException {
+    public void everyday2for$12() throws MalformedURLException, InterruptedException {
 
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyLTOOrderIOS.html");
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12IOS.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -105,38 +106,13 @@ public class LTOJalapenoRoastMeal {
             signIn.click();
             test.pass("Clicked on Sign In");
 
-            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
+            test = extent.createTest("pickUp Order Flow Test").assignCategory("Regression");
+
 
             Thread.sleep(7000);
-            WebElement menu = driver.findElement(AppiumBy.accessibilityId("Menu"));
-            menu.click();
-            test.pass("Clicked on menu");
-
-            Thread.sleep(7000);
-            WebElement LTO = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeImage"));
-            LTO.click();
-            test.pass("Clicked on LTO");
-
-            Thread.sleep(9000);
-            WebElement selectOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
-            selectOrder.click();
-            test.pass("Clicked on selectOrder");
-
-            Thread.sleep(6000);
-            WebElement viewItem = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`]"));
-            viewItem.click();
-            test.pass("Clicked on viewItem");
-
-            Thread.sleep(5000);
-            WebElement pickUp = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"ORDER PICKUP\"`]"));
-            pickUp.click();
-            test.pass("Clicked on orderPickUp");
-
-
-            Thread.sleep(5000);
-            WebElement proceed = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"PROCEED\"`]"));
-            proceed.click();
-            test.pass("Clicked on proceed");
+            WebElement pickupBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[2]"));
+            pickupBtn.click();
+            test.pass("Clicked on pickupBtn");
 
             Thread.sleep(5000);
             WebElement cross = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`]"));
@@ -157,11 +133,11 @@ public class LTOJalapenoRoastMeal {
 
             try {
                 WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
-                pickerWheel.sendKeys("4"); // Set the desired value
-                test.pass("Time '4' selected from picker");
+                pickerWheel.sendKeys("1"); // Set the desired value
+                test.pass("Time '1' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '4' not found in time picker");
+                test.fail("Value '1' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -181,10 +157,22 @@ public class LTOJalapenoRoastMeal {
             test.pass("Clicked on confirmTime");
 
 
-            Thread.sleep(5000);
+            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
+
+//            Thread.sleep(7000);
+//            WebElement menu = driver.findElement(AppiumBy.accessibilityId("Menu"));
+//            menu.click();
+//            test.pass("Clicked on menu");
+
+            Thread.sleep(7000);
+            WebElement everyday = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeImage"));
+            everyday.click();
+            test.pass("Clicked on everyday value");
+
+            Thread.sleep(7000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(251, 598);
-            var end = new Point(255, 298);
+            var start = new Point(245, 697);
+            var end = new Point(240, 380);
             var swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -194,9 +182,16 @@ public class LTOJalapenoRoastMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
+
+            Thread.sleep(7000);
+            WebElement el7 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
+            el7.click();
+            test.pass("Clicked on view item");
+
+            Thread.sleep(5000);
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(251, 598);
-            end = new Point(255, 298);
+            start = new Point(192, 714);
+            end = new Point(199, 337);
             swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -206,9 +201,10 @@ public class LTOJalapenoRoastMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
+
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(158, 658);
-            end = new Point(154, 339);
+            start = new Point(197, 732);
+            end = new Point(184, 289);
             swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -218,15 +214,15 @@ public class LTOJalapenoRoastMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-
-            WebElement beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][1]"));
+            Thread.sleep(5000);
+            WebElement beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
             beverage.click();
             test.pass("Clicked on beverage");
 
 
             finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(200, 634);
-            end = new Point(203, 373);
+            start = new Point(216, 681);
+            end = new Point(219, 351);
             swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
@@ -236,30 +232,16 @@ public class LTOJalapenoRoastMeal {
             swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
             driver.perform(Arrays.asList(swipe));
 
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(169, 710);
-            end = new Point(183, 437);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            WebElement drink = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"+\"`][8]"));
+            WebElement drink = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"+\"`][11]"));
             drink.click();
             test.pass("Clicked on coca-cola-drink");
-
 
             Thread.sleep(6000);
             WebElement AddCart = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]"));
             AddCart.click();
             test.pass("Clicked on AddCart");
 
-            Thread.sleep(7000);
+            Thread.sleep(9000);
             WebElement viewCart = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"View cart\"`]"));
             viewCart.click();
             test.pass("Clicked on viewCart");
@@ -309,7 +291,7 @@ public class LTOJalapenoRoastMeal {
             Thread.sleep(50000);
             WebElement cardName = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Name on Card\"`]"));
             cardName.click();
-            cardName.sendKeys("test");
+            cardName.sendKeys("arbys/test");
             test.pass("enter cardName");
 
             Thread.sleep(5000);
@@ -359,6 +341,33 @@ public class LTOJalapenoRoastMeal {
 
             Thread.sleep(10000);
 
+            try {
+                WebElement successMsg = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'ORDER SUCCESSFULLY PLACED'")
+                );
+                WebElement trackOrderBtn = driver.findElement(
+                        MobileBy.iOSNsPredicateString("label == 'TRACK ORDER'")
+                );
+
+                Assert.assertTrue(successMsg.isDisplayed(), "Success message is visible");
+                Assert.assertTrue(trackOrderBtn.isDisplayed(), "Track Order button is visible");
+
+                test.pass("Order confirmation popup verified successfully");
+
+            } catch (NoSuchElementException e) {
+                test.fail("Order confirmation popup elements not found");
+                Assert.fail("Popup did not appear as expected");
+            }
+
+            WebElement orderIdElement = driver.findElement(
+                    MobileBy.iOSNsPredicateString("value MATCHES '\\\\d{6}'")
+            );
+            String orderId = orderIdElement.getText();
+            System.out.println("Order ID: " + orderId);
+            test.pass("Order ID captured: " + orderId);
+
+            test.pass("Final checkout completed");
+
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
@@ -374,5 +383,4 @@ public class LTOJalapenoRoastMeal {
             extent.flush();
         }
     }
-
 }

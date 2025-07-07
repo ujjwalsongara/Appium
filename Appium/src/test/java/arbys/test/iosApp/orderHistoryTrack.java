@@ -1,4 +1,4 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;

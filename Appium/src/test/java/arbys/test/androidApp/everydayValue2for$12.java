@@ -1,4 +1,4 @@
-package test.androidApp;
+package arbys.test.androidApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -325,7 +325,7 @@ public class everydayValue2for$12 {
             Thread.sleep(60000);
             WebElement cardHolderName = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"ccName\")"));
             cardHolderName.click();
-            cardHolderName.sendKeys("test");
+            cardHolderName.sendKeys("arbys/test");
             test.pass("Clicked cardHolderName ");
 
             Thread.sleep(5000);

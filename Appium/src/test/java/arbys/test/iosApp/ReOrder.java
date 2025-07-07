@@ -1,4 +1,4 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -25,7 +25,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Set;
 
-public class everydayValue2for$12 {
+public class ReOrder {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -49,9 +49,8 @@ public class everydayValue2for$12 {
     }
 
     @Test
-    public void everyday2for$12() throws MalformedURLException, InterruptedException {
-
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArby2for$12IOS.html");
+    public void ReOrder() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyReOrderIOS.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
@@ -106,13 +105,59 @@ public class everydayValue2for$12 {
             signIn.click();
             test.pass("Clicked on Sign In");
 
-            test = extent.createTest("pickUp Order Flow Test").assignCategory("Regression");
+            test = extent.createTest("Track order Flow Test").assignCategory("Regression");
+
+            Thread.sleep(6000);
+            WebElement trackOrder = driver.findElement(AppiumBy.accessibilityId("Track Order"));
+            trackOrder.click();
+            test.pass("Clicked on trackOrder");
+
+            Thread.sleep(6000);
+            WebElement pastOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Past Orders\"`]"));
+            pastOrder.click();
+            test.pass("Clicked on pastOrder");
+
+            WebElement reOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"REORDER\"`][1]"));
+            reOrder.click();
+            test.pass("Clicked on reOrder");
+
+            WebElement changeOk = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"OK\"`]"));
+            changeOk.click();
+            test.pass("Clicked on changeOk");
+
+//                Thread.sleep(5000);
+//                WebElement SkipBut = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"SKIP\"`]"));
+//                SkipBut.click();
+//                test.pass("Clicked on skip");
 
 
-            Thread.sleep(7000);
-            WebElement pickupBtn = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[2]"));
-            pickupBtn.click();
-            test.pass("Clicked on pickupBtn");
+//                final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+//                var start = new Point(210, 751);
+//                var end = new Point(216, 402);
+//                var swipe = new Sequence(finger, 1);
+//                swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
+//                        PointerInput.Origin.viewport(), start.getX(), start.getY()));
+//                swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+//                swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
+//                        PointerInput.Origin.viewport(), end.getX(), end.getY()));
+//                swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+//                driver.perform(Arrays.asList(swipe));
+
+            Thread.sleep(5000);
+            WebElement checkoutButton = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CHECKOUT\"`]"));
+            checkoutButton.click();
+            test.pass("Clicked on checkout");
+
+            Thread.sleep(5000);
+            WebElement pickUp = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"ORDER PICKUP\"`]"));
+            pickUp.click();
+            test.pass("Clicked on orderPickUp");
+
+
+            Thread.sleep(5000);
+            WebElement proceed = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"PROCEED\"`]"));
+            proceed.click();
+            test.pass("Clicked on proceed");
 
             Thread.sleep(5000);
             WebElement cross = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`]"));
@@ -133,11 +178,11 @@ public class everydayValue2for$12 {
 
             try {
                 WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
-                pickerWheel.sendKeys("1"); // Set the desired value
-                test.pass("Time '1' selected from picker");
+                pickerWheel.sendKeys("11"); // Set the desired value
+                test.pass("Time '11' selected from picker");
 
             } catch (NoSuchElementException e) {
-                test.fail("Value '1' not found in time picker");
+                test.fail("Value '11' not found in time picker");
                 Assert.fail("Time picker failed");
             }
 
@@ -156,102 +201,10 @@ public class everydayValue2for$12 {
             confirmTime.click();
             test.pass("Clicked on confirmTime");
 
-
-            test = extent.createTest("Menu Flow Test").assignCategory("Regression");
-
-//            Thread.sleep(7000);
-//            WebElement menu = driver.findElement(AppiumBy.accessibilityId("Menu"));
-//            menu.click();
-//            test.pass("Clicked on menu");
-
-            Thread.sleep(7000);
-            WebElement everyday = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeImage"));
-            everyday.click();
-            test.pass("Clicked on everyday value");
-
-            Thread.sleep(7000);
             var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            var start = new Point(245, 697);
-            var end = new Point(240, 380);
+            var start = new Point(227, 682);
+            var end = new Point(232, 412);
             var swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-
-            Thread.sleep(7000);
-            WebElement el7 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[3]"));
-            el7.click();
-            test.pass("Clicked on view item");
-
-            Thread.sleep(5000);
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(192, 714);
-            end = new Point(199, 337);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(197, 732);
-            end = new Point(184, 289);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            Thread.sleep(5000);
-            WebElement beverage = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Forward\"`][3]"));
-            beverage.click();
-            test.pass("Clicked on beverage");
-
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(216, 681);
-            end = new Point(219, 351);
-            swipe = new Sequence(finger, 1);
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                    PointerInput.Origin.viewport(), start.getX(), start.getY()));
-            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-            swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-                    PointerInput.Origin.viewport(), end.getX(), end.getY()));
-            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(Arrays.asList(swipe));
-
-            WebElement drink = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"+\"`][11]"));
-            drink.click();
-            test.pass("Clicked on coca-cola-drink");
-
-            Thread.sleep(6000);
-            WebElement AddCart = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]"));
-            AddCart.click();
-            test.pass("Clicked on AddCart");
-
-            Thread.sleep(9000);
-            WebElement viewCart = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"View cart\"`]"));
-            viewCart.click();
-            test.pass("Clicked on viewCart");
-
-            Thread.sleep(50000);
-
-            finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-            start = new Point(227, 682);
-            end = new Point(232, 412);
-            swipe = new Sequence(finger, 1);
             swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
                     PointerInput.Origin.viewport(), start.getX(), start.getY()));
             swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
@@ -291,7 +244,7 @@ public class everydayValue2for$12 {
             Thread.sleep(50000);
             WebElement cardName = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Name on Card\"`]"));
             cardName.click();
-            cardName.sendKeys("test");
+            cardName.sendKeys("arbys/test");
             test.pass("enter cardName");
 
             Thread.sleep(5000);
@@ -339,7 +292,7 @@ public class everydayValue2for$12 {
             WebElement redone = driver.findElement(AppiumBy.accessibilityId("Done"));
             redone.click();
 
-            Thread.sleep(10000);
+            Thread.sleep(50000);
 
             try {
                 WebElement successMsg = driver.findElement(

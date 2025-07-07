@@ -1,4 +1,4 @@
-package test.iosApp;
+package arbys.test.iosApp;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -22,10 +22,12 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
-public class ReOrder {
+public class ArbysPaymentAutomation {
 
     AndroidDriver driver;
     ExtentReports extent;
@@ -37,11 +39,16 @@ public class ReOrder {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "18.5");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys2.app");
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/apple/Downloads/Arbys.app");
         capabilities.setCapability("autoAcceptAlerts", true);
-        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("autoGrantPermissions", true); // Grant all permissions
+//        capabilities.setCapability("ios"," /Users/apple/Downloads/Arbys.app");
+//        capabilities.setCapability("bundleId", "com.buzzparade.arbysinternational");
+//        capabilities.setCapability("fullReset", true);
         capabilities.setCapability("noReset", false);
         capabilities.setCapability("newCommandTimeout", 7000);
+//        capabilities.setCapability("udid", "A9864702-9691-4A3C-B34B-F60C2A3099A2");  // Required for real devices
+
 
         URL serverURL = new URL("http://127.0.0.1:4723/");
         IOSDriver driver = new IOSDriver(serverURL, capabilities);
@@ -49,17 +56,19 @@ public class ReOrder {
     }
 
     @Test
-    public void ReOrder() throws MalformedURLException, InterruptedException {
-        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportArbyReOrderIOS.html");
+    public void payment() throws MalformedURLException, InterruptedException {
+        ExtentSparkReporter spark = new ExtentSparkReporter("test-output/AppiumTestReportIOSArby2PaymentMethod.html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
         IOSDriver driver = getIosDriver();
 
+//        URL url = URI.create("http://127.0.0.1:4723/").toURL();
+//        driver = new AndroidDriver(url, capabilities);
+
         test = extent.createTest("Signup Flow Test").assignCategory("Regression");
 
         try {
-
             Thread.sleep(2000);
             test.info("Application started");
 
@@ -78,6 +87,7 @@ public class ReOrder {
             dot.click();
             test.pass("Selected Login");
 
+
             Thread.sleep(5000);
             WebElement signInButton = driver.findElement(AppiumBy.accessibilityId("SIGN IN / REGISTER"));
             signInButton.click();
@@ -88,11 +98,13 @@ public class ReOrder {
             emailButton.click();
             test.pass("Selected Email Login");
 
+
             Thread.sleep(5000);
             WebElement email = driver.findElement(AppiumBy.className("XCUIElementTypeTextField"));
             email.click();
             email.sendKeys("ujjwal@buzzparade.com");
             test.pass("Entered email");
+
 
             Thread.sleep(5000);
             WebElement password = driver.findElement(AppiumBy.className("XCUIElementTypeSecureTextField"));
@@ -105,43 +117,31 @@ public class ReOrder {
             signIn.click();
             test.pass("Clicked on Sign In");
 
-            test = extent.createTest("Track order Flow Test").assignCategory("Regression");
+//            Thread.sleep(50000);
+//            WebElement el9 = driver.findElement(AppiumBy.xpath("(//XCUIElementTypeOther[@name=\"Horizontal scroll bar, 1 page\"])[5]"));
+//            el9.click();
+
+//            Thread.sleep(5000);
+//            WebElement el9 = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \" \"`]"));
+//            el9.click();
+
+
+            test = extent.createTest("Order Flow Test").assignCategory("Regression");
 
             Thread.sleep(6000);
-            WebElement trackOrder = driver.findElement(AppiumBy.accessibilityId("Track Order"));
-            trackOrder.click();
-            test.pass("Clicked on trackOrder");
-
-            Thread.sleep(6000);
-            WebElement pastOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"Past Orders\"`]"));
-            pastOrder.click();
-            test.pass("Clicked on pastOrder");
-
-            WebElement reOrder = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"REORDER\"`][1]"));
-            reOrder.click();
-            test.pass("Clicked on reOrder");
-
-            WebElement changeOk = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"OK\"`]"));
-            changeOk.click();
-            test.pass("Clicked on changeOk");
-
-//                Thread.sleep(5000);
-//                WebElement SkipBut = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"SKIP\"`]"));
-//                SkipBut.click();
-//                test.pass("Clicked on skip");
+            WebElement cartButton = driver.findElement(AppiumBy.accessibilityId("Cart"));
+            cartButton.click();
+            test.pass("Clicked on cart");
 
 
-//                final var finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-//                var start = new Point(210, 751);
-//                var end = new Point(216, 402);
-//                var swipe = new Sequence(finger, 1);
-//                swipe.addAction(finger.createPointerMove(Duration.ofMillis(0),
-//                        PointerInput.Origin.viewport(), start.getX(), start.getY()));
-//                swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-//                swipe.addAction(finger.createPointerMove(Duration.ofMillis(1000),
-//                        PointerInput.Origin.viewport(), end.getX(), end.getY()));
-//                swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-//                driver.perform(Arrays.asList(swipe));
+            Thread.sleep(5000);
+            WebElement SkipBut = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"SKIP\"`]"));
+            SkipBut.click();
+            test.pass("Clicked on skip");
+
+//            Thread.sleep(5000);
+//            WebElement el12 = driver.findElement(AppiumBy.accessibilityId("OK"));
+//            el12.click();
 
             Thread.sleep(5000);
             WebElement checkoutButton = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeButton[`name == \"CHECKOUT\"`]"));
@@ -177,14 +177,42 @@ public class ReOrder {
             Thread.sleep(5000);
 
             try {
-                WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
-                pickerWheel.sendKeys("11"); // Set the desired value
-                test.pass("Time '11' selected from picker");
+                // Step 1: Get current time
+                int currentHour = LocalTime.now().getHour();
 
-            } catch (NoSuchElementException e) {
-                test.fail("Value '11' not found in time picker");
-                Assert.fail("Time picker failed");
+                // Step 2: Convert to 12-hour format and add 1 hour
+                int nextHour = (currentHour + 1) % 12;
+                if (nextHour == 0) nextHour = 12;
+
+                String nextHourStr = String.valueOf(nextHour);
+
+                // Step 3: Find the iOS picker wheel
+                List<WebElement> pickerWheels = driver.findElements(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
+
+                if (!pickerWheels.isEmpty()) {
+                    // Assume first wheel is for hours
+                    WebElement hourPicker = pickerWheels.get(0);
+                    hourPicker.sendKeys(nextHourStr);
+                    test.pass("Time '" + nextHourStr + "' selected in picker");
+                } else {
+                    test.fail("No picker wheel found");
+                    Assert.fail("Failed to locate time picker wheel");
+                }
+
+            } catch (Exception e) {
+                test.fail("Exception while selecting time: " + e.getMessage());
+                e.printStackTrace();
             }
+
+//            try {
+//                WebElement pickerWheel = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
+//                pickerWheel.sendKeys("4"); // Set the desired value
+//                test.pass("Time '4' selected from picker");
+//
+//            } catch (NoSuchElementException e) {
+//                test.fail("Value '4' not found in time picker");
+//                Assert.fail("Time picker failed");
+//            }
 
             Thread.sleep(5000);
             WebElement timeDrop = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeImage[`name == \"dropdown\"`][2]"));
@@ -244,7 +272,7 @@ public class ReOrder {
             Thread.sleep(50000);
             WebElement cardName = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeTextField[`name == \"Name on Card\"`]"));
             cardName.click();
-            cardName.sendKeys("test");
+            cardName.sendKeys("arbys/test");
             test.pass("enter cardName");
 
             Thread.sleep(5000);
@@ -321,6 +349,7 @@ public class ReOrder {
 
             test.pass("Final checkout completed");
 
+
         } catch (Exception e) {
             test.fail("Test failed due to: " + e.getMessage());
             Assert.fail(e.getMessage());
@@ -337,3 +366,4 @@ public class ReOrder {
         }
     }
 }
+
